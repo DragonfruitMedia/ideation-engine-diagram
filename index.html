@@ -117,6 +117,22 @@
   }
   .loop b { display: block; margin-bottom: 3px; }
   .loop span { color: var(--muted); }
+
+  .bubble {
+    margin-top: 26px;
+    border: 1.5px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 18px;
+    padding: 20px 24px;
+  }
+  .bubble h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+  }
+  .bubble ul { margin: 0; padding-left: 18px; }
+  .bubble li { font-size: 13.5px; line-height: 1.55; margin-bottom: 8px; }
+  .bubble li:last-child { margin-bottom: 0; }
+  .bubble b { font-weight: 600; }
 </style>
 
 <div class="wrap">
@@ -126,6 +142,8 @@
   <p class="intro">One portal where a Creative Director connects a client's YouTube channel and knowledge base. The engine pulls a wide but curated data set, refines it against the client's persona and DFM's standards, and presents topics the CD iterates on live &mdash; a gamified loop that only ends when every standard is hit. Each locked topic ships with a research brief, sample packaging, and a client-calibrated predictive score, and the system self-scores against the YouTube Performance Standard's locked 7-day target.</p>
   <p class="sec-label">How</p>
   <p class="intro">The Connect step scopes the client-specific layers &mdash; knowledge base, channel, calibration. The Dragonfruit proprietary data lake (Turso, A/B database, standards) is shared and read-only during ideation: every connected session benchmarks against the same cross-client pool. Writes back into Turso are keyed by client, so ten CDs running ten clients simultaneously never collide &mdash; they're reading one shared brain and writing to their own client's rows.</p>
+  <p class="sec-label">The two-layer principle</p>
+  <p class="intro">The process layer &mdash; engine, agents, skills, standards &mdash; is the shared product. The personal layer &mdash; each client's knowledge base, calibration, and lessons &mdash; is sealed per client: never shared across sessions and never packaged into the product, enforced in tooling rather than policy. The engine never invents a client fact or the client's voice; client truth comes only from the knowledge base, so the CD's time goes only to taste and judgment.</p>
 
   <div class="legend">
     <span class="item"><span class="key-solid"></span> Data flow</span>
@@ -244,7 +262,7 @@
     <text class="a-t" x="334" y="1305" text-anchor="middle">RECALIBRATION AGENT</text>
 
     <!-- ============ ENGINE ============ -->
-    <rect class="e-box" x="620" y="410" width="400" height="492" rx="14"/>
+    <rect class="e-box" x="620" y="410" width="400" height="508" rx="14"/>
     <text class="e-head" x="820" y="448" text-anchor="middle">IDEATION ENGINE</text>
     <text class="g-sub" x="820" y="470" text-anchor="middle">CD portal &mdash; one client connected at a time</text>
 
@@ -253,35 +271,36 @@
     <text class="n-title" x="676" y="514">Connect</text>
     <text class="n-sub" x="676" y="533">Client YouTube channel + knowledge base</text>
 
-    <rect class="e-row" x="640" y="556" width="360" height="56" rx="8"/>
+    <rect class="e-row" x="640" y="556" width="360" height="72" rx="8"/>
     <text class="step-n" x="656" y="580">2</text>
     <text class="n-title" x="676" y="580">Pull</text>
     <text class="n-sub" x="676" y="599">Sweep every research source</text>
+    <text class="n-sub" x="676" y="614">Spike scan &mdash; fresh client moments worth a video</text>
     <rect class="a-chip" x="878" y="573" width="112" height="20" rx="10"/>
     <text class="a-t" x="934" y="587" text-anchor="middle">RESEARCH AGENT</text>
 
-    <rect class="e-row" x="640" y="622" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="646">3</text>
-    <text class="n-title" x="676" y="646">Refine</text>
-    <text class="n-sub" x="676" y="665">Against the client's persona &amp; strategy</text>
+    <rect class="e-row" x="640" y="638" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="662">3</text>
+    <text class="n-title" x="676" y="662">Refine</text>
+    <text class="n-sub" x="676" y="681">Against the client's persona &amp; strategy</text>
 
-    <rect class="e-row" x="640" y="688" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="712">4</text>
-    <text class="n-title" x="676" y="712">Triangulate</text>
-    <text class="n-sub" x="676" y="731">Against DFM Ideation &amp; Craft Standards</text>
+    <rect class="e-row" x="640" y="704" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="728">4</text>
+    <text class="n-title" x="676" y="728">Triangulate</text>
+    <text class="n-sub" x="676" y="747">Against DFM Ideation &amp; Craft Standards</text>
 
-    <rect class="e-row" x="640" y="754" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="778">5</text>
-    <text class="n-title" x="676" y="778">Benchmark</text>
-    <text class="n-sub" x="676" y="797">Against Turso cross-client data</text>
-    <rect class="a-chip" x="886" y="771" width="104" height="20" rx="10"/>
-    <text class="a-t" x="938" y="785" text-anchor="middle">SCORING AGENT</text>
+    <rect class="e-row" x="640" y="770" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="794">5</text>
+    <text class="n-title" x="676" y="794">Benchmark</text>
+    <text class="n-sub" x="676" y="813">Against Turso cross-client data</text>
+    <rect class="a-chip" x="886" y="787" width="104" height="20" rx="10"/>
+    <text class="a-t" x="938" y="801" text-anchor="middle">SCORING AGENT</text>
 
-    <rect class="e-row" x="640" y="820" width="360" height="66" rx="8"/>
-    <text class="step-n" x="656" y="844">6</text>
-    <text class="n-title" x="676" y="844">Present &amp; iterate</text>
-    <text class="n-sub" x="676" y="862">Topics surface to the CD, who refines live with the</text>
-    <text class="n-sub" x="676" y="877">engine &mdash; gamified &mdash; until every standard is hit</text>
+    <rect class="e-row" x="640" y="836" width="360" height="66" rx="8"/>
+    <text class="step-n" x="656" y="860">6</text>
+    <text class="n-title" x="676" y="860">Present &amp; iterate</text>
+    <text class="n-sub" x="676" y="878">Topics surface to the CD, who refines live with the</text>
+    <text class="n-sub" x="676" y="893">engine &mdash; gamified &mdash; until every standard is hit</text>
 
     <!-- ============ OUTPUT: TOPIC SLATE ============ -->
     <rect class="o-box" x="1200" y="300" width="400" height="232" rx="14"/>
@@ -350,8 +369,8 @@
 
     <!-- ============ SOLID FLOWS ============ -->
     <path class="flow" d="M440,300 H530 V518 H610" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,785 H555 V584 H610" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,1020 H580 V716 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,785 H555 V592 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,1020 H580 V732 H610" marker-end="url(#arr)"/>
     <path class="flow" d="M1020,560 H1110 V400 H1190" marker-end="url(#arr)"/>
     <path class="flow" d="M1600,420 H1692" marker-end="url(#arr)"/>
     <path class="flow" d="M1400,532 V550" marker-end="url(#arr)"/>
@@ -367,7 +386,7 @@
     <path class="fb" d="M1810,376 V240 H820 V404" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1315" y="232" text-anchor="middle">Vault topics resurface in future pull cycles</text>
 
-    <path class="fb" d="M1200,1262 H950 V914" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1200,1262 H950 V930" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1010" y="1254" text-anchor="middle">Prediction accuracy tunes the model</text>
 
     <path class="fb" d="M1400,1298 V1380 H240 V1340" marker-end="url(#arrfb)"/>
@@ -385,6 +404,17 @@
     <div class="loop"><b>Prediction loop</b><span>The tracking agent snapshots real views; every score is self-checked against the locked 7-day target (28-day check upgrades slow burners), client-keyed so scoring sharpens per client.</span></div>
     <div class="loop"><b>Standards loop</b><span>The recalibration agent proposes monthly updates to the Ideation &amp; Craft Standards from agency-wide performance &mdash; a human approves.</span></div>
     <div class="loop"><b>Lessons loop</b><span>Qualitative takeaways (what this client approved, revised, or rejected) are confirmed by the CD and written back into the knowledge base.</span></div>
+  </div>
+
+  <div class="bubble">
+    <h2>Gamified CD portal &mdash; design notes</h2>
+    <ul>
+      <li><b>Deal.</b> Each pull cycle deals the CD a hand of topic cards, each showing its predictive score and the sources that surfaced it. Weak cards are discarded (qualifiers go to the Vault); promising ones get picked up.</li>
+      <li><b>Refine.</b> Opening a card shows a standards board &mdash; every craft standard as a live meter (concept delta, demand validation, dinner-party test, packaging clarity). The CD edits the angle, title, and thumbnail concept, and the engine re-scores in real time: change one word, watch the meter move.</li>
+      <li><b>Lock.</b> When every meter is green and the predictive score clears the bar, the topic locks and lands on the slate. No partial credit &mdash; mirroring "100% of craft standards before the next stage."</li>
+      <li><b>The meta-game.</b> Track each CD's calling average &mdash; how often their locked topics actually went green at 7 days &mdash; plus a smash-line counter for videos past 2&times; target. Prediction accuracy becomes the CD's score too, not just the model's.</li>
+      <li><b>Deliberately excluded:</b> leaderboards ranking CDs against each other. Channels differ wildly in difficulty and the multiple absorbs that difference, so the game is always CD-vs-the-bar, never CD-vs-CD.</li>
+    </ul>
   </div>
 </div>
 
