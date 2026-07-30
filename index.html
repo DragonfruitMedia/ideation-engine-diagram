@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ideation Engine Workflow</title>
+<style>
+  :root {
+    --paper: #FBF9FA;
+    --panel: #F3EEF1;
+    --card: #FFFFFF;
+    --ink: #241C21;
+    --muted: #7A6E76;
+    --line: #DCD3D8;
+    --accent: #B01E5C;        /* dragonfruit magenta */
+    --accent-soft: #F7DFE9;
+    --green: #2E7D4F;         /* dragonfruit skin */
+    --green-soft: #DFEFE5;
+    --flow: #4A414736;
+    --flow-strong: #4A4147;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1C1719; --panel: #251F22; --card: #2E272B; --ink: #F0E9ED;
+      --muted: #A2969D; --line: #453C41; --accent: #F0578F; --accent-soft: #4A2334;
+      --green: #62C08C; --green-soft: #1F3A2B; --flow: #B7ACB236; --flow-strong: #B7ACB2;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1C1719; --panel: #251F22; --card: #2E272B; --ink: #F0E9ED;
+    --muted: #A2969D; --line: #453C41; --accent: #F0578F; --accent-soft: #4A2334;
+    --green: #62C08C; --green-soft: #1F3A2B; --flow: #B7ACB236; --flow-strong: #B7ACB2;
+  }
+  :root[data-theme="light"] {
+    --paper: #FBF9FA; --panel: #F3EEF1; --card: #FFFFFF; --ink: #241C21;
+    --muted: #7A6E76; --line: #DCD3D8; --accent: #B01E5C; --accent-soft: #F7DFE9;
+    --green: #2E7D4F; --green-soft: #DFEFE5; --flow: #4A414736; --flow-strong: #4A4147;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 40px 28px 56px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+  }
+  h1 {
+    font-size: 30px; font-weight: 700; letter-spacing: -0.01em;
+    margin: 0 0 8px; text-wrap: balance;
+  }
+  .intro {
+    font-size: 15px; line-height: 1.5; color: var(--muted);
+    max-width: 62ch; margin: 0 0 22px;
+  }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center;
+    font-size: 12.5px; color: var(--muted);
+    padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--panel); margin-bottom: 26px;
+  }
+  .legend .item { display: flex; align-items: center; gap: 8px; }
+  .key-solid, .key-dash { width: 34px; height: 0; border-top: 2.5px solid var(--flow-strong); }
+  .key-dash { border-top: 2.5px dashed var(--accent); }
+  .key-chip {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--green); background: var(--green-soft);
+    border-radius: 20px; padding: 3px 9px;
+  }
+
+  .diagram { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  .diagram svg { display: block; min-width: 1200px; width: 100%; height: auto; }
+
+  /* SVG classes */
+  .g-box   { fill: var(--panel); stroke: var(--line); }
+  .node    { fill: var(--card); stroke: var(--line); }
+  .e-box   { fill: var(--card); stroke: var(--accent); stroke-width: 2; }
+  .e-row   { fill: var(--panel); stroke: none; }
+  .o-box   { fill: var(--green-soft); stroke: var(--green); stroke-width: 1.5; }
+  .p-node  { fill: var(--card); stroke: var(--line); }
+  .chip    { fill: var(--green-soft); }
+  .chip-t  { font: 700 10px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.06em; fill: var(--green); }
+  .g-head  { font: 700 13.5px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.09em; fill: var(--ink); }
+  .g-sub   { font: 500 12px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
+  .n-title { font: 600 14.5px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--ink); }
+  .n-sub   { font: 500 11.5px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
+  .e-head  { font: 700 17px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.06em; fill: var(--accent); }
+  .step-n  { font: 700 12px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--accent); }
+  .fb-t    { font: 600 12px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--accent); }
+  .fl-t    { font: 600 11.5px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
+  .flow    { stroke: var(--flow-strong); stroke-width: 2.25; fill: none; }
+  .fb      { stroke: var(--accent); stroke-width: 2.25; stroke-dasharray: 7 6; fill: none; }
+  .tick    { fill: var(--accent); }
+
+  .loops {
+    margin-top: 26px; display: grid; gap: 10px 22px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .loop {
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 10px; background: var(--panel);
+    padding: 12px 14px; font-size: 13px; line-height: 1.45;
+  }
+  .loop b { display: block; margin-bottom: 3px; }
+  .loop span { color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Dragonfruit OS &middot; WhatBytes build</p>
+  <h1>Ideation Engine &mdash; Workflow</h1>
+  <p class="intro">One portal where a Creative Director connects a client's YouTube channel and knowledge base. The engine pulls a wide but curated data set, refines it against the client's persona and DFM's standards, and outputs vetted topics with a research brief, sample packaging, and a client-calibrated predictive score &mdash; then self-scores against the YouTube Performance Standard's locked 7-day target.</p>
+
+  <div class="legend">
+    <span class="item"><span class="key-solid"></span> Data flow</span>
+    <span class="item"><span class="key-dash"></span> Feedback loop</span>
+    <span class="item"><span class="key-chip">WEEKLY</span> Refresh cadence</span>
+  </div>
+
+  <div class="diagram">
+  <svg viewBox="0 0 1960 1460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow diagram of the Dragonfruit ideation engine">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--flow-strong)"/>
+      </marker>
+      <marker id="arrfb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+      </marker>
+    </defs>
+
+    <!-- ============ GROUP A: CLIENT KNOWLEDGE BASE ============ -->
+    <rect class="g-box" x="40" y="30" width="400" height="552" rx="12"/>
+    <rect class="tick" x="40" y="46" width="4" height="26" rx="2"/>
+    <text class="g-head" x="62" y="60">CLIENT KNOWLEDGE BASE</text>
+    <text class="g-sub" x="62" y="80">Per-client &middot; constantly ingesting new material</text>
+    <rect class="chip" x="322" y="42" width="102" height="20" rx="10"/>
+    <text class="chip-t" x="373" y="56" text-anchor="middle">AUTO-REFRESH</text>
+
+    <rect class="node" x="60" y="100" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="124">Voice Looms</text>
+    <text class="n-sub" x="76" y="143">Client-provided voice &amp; tone walkthroughs</text>
+
+    <rect class="node" x="60" y="168" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="192">Kick-off surveys</text>
+    <text class="n-sub" x="76" y="211">Collected at onboarding</text>
+
+    <rect class="node" x="60" y="236" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="260">Client call transcripts</text>
+    <text class="n-sub" x="76" y="279">Grain &mdash; auto-scraped</text>
+    <rect class="chip" x="330" y="253" width="76" height="20" rx="10"/>
+    <text class="chip-t" x="368" y="267" text-anchor="middle">BIWEEKLY</text>
+
+    <rect class="node" x="60" y="304" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="328">Slack feedback</text>
+    <text class="n-sub" x="76" y="347">Client channel comments &amp; requests</text>
+    <rect class="chip" x="340" y="321" width="66" height="20" rx="10"/>
+    <text class="chip-t" x="373" y="335" text-anchor="middle">WEEKLY</text>
+
+    <rect class="node" x="60" y="372" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="396">Frame.io comments</text>
+    <text class="n-sub" x="76" y="415">Client feedback on video reviews</text>
+    <rect class="chip" x="340" y="389" width="66" height="20" rx="10"/>
+    <text class="chip-t" x="373" y="403" text-anchor="middle">WEEKLY</text>
+
+    <rect class="node" x="60" y="440" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="464">Social persona scrape</text>
+    <text class="n-sub" x="76" y="483">Instagram &middot; Facebook &middot; X &middot; LinkedIn</text>
+    <rect class="chip" x="314" y="450" width="92" height="20" rx="10"/>
+    <text class="chip-t" x="360" y="464" text-anchor="middle">CONTINUOUS</text>
+
+    <rect class="node" x="60" y="508" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="532">Published video transcripts</text>
+    <text class="n-sub" x="76" y="551">Every video on the client's YouTube channel</text>
+
+    <!-- ============ GROUP B: MARKET & RESEARCH SIGNALS ============ -->
+    <rect class="g-box" x="40" y="612" width="400" height="346" rx="12"/>
+    <rect class="tick" x="40" y="628" width="4" height="26" rx="2"/>
+    <text class="g-head" x="62" y="642">MARKET &amp; RESEARCH SIGNALS</text>
+    <text class="g-sub" x="62" y="662">Pulled per client by the engine</text>
+
+    <rect class="node" x="60" y="680" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="704">Client YouTube channel</text>
+    <text class="n-sub" x="76" y="723">Public analytics &amp; channel demand &mdash; connected in portal</text>
+
+    <rect class="node" x="60" y="748" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="772">Calibrated Tubular query</text>
+    <text class="n-sub" x="76" y="791">Tuned to the client's brand</text>
+    <rect class="chip" x="340" y="765" width="66" height="20" rx="10"/>
+    <text class="chip-t" x="373" y="779" text-anchor="middle">WEEKLY</text>
+
+    <rect class="node" x="60" y="816" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="840">1of10 outliers</text>
+    <text class="n-sub" x="76" y="859">Breakout-video signals on YouTube</text>
+
+    <rect class="node" x="60" y="884" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="908">Keywords &rarr; Reddit + Google Trends</text>
+    <text class="n-sub" x="76" y="927">CD-entered seed keywords</text>
+
+    <!-- ============ GROUP C: DFM PROPRIETARY ============ -->
+    <rect class="g-box" x="40" y="988" width="400" height="346" rx="12"/>
+    <rect class="tick" x="40" y="1004" width="4" height="26" rx="2"/>
+    <text class="g-head" x="62" y="1018">DFM PROPRIETARY</text>
+    <text class="g-sub" x="62" y="1038">Cross-client intelligence</text>
+
+    <rect class="node" x="60" y="1056" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1080">Turso Performance Database</text>
+    <text class="n-sub" x="76" y="1099">7 &amp; 28-day snapshots, targets, statuses &mdash; all clients</text>
+
+    <rect class="node" x="60" y="1124" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1148">Prediction ledger</text>
+    <text class="n-sub" x="76" y="1167">Score &middot; model version &middot; locked target &mdash; in Turso</text>
+
+    <rect class="node" x="60" y="1192" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1216">A/B Testing Database</text>
+    <text class="n-sub" x="76" y="1235">Packaging split-test results &mdash; titles &amp; thumbnails</text>
+
+    <rect class="node" x="60" y="1260" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1284">Ideation &amp; Craft Standards</text>
+    <text class="n-sub" x="76" y="1303">Concept &middot; audience &middot; titles &middot; thumbnails</text>
+    <rect class="chip" x="330" y="1277" width="76" height="20" rx="10"/>
+    <text class="chip-t" x="368" y="1291" text-anchor="middle">MONTHLY</text>
+
+    <!-- ============ ENGINE ============ -->
+    <rect class="e-box" x="620" y="410" width="400" height="420" rx="14"/>
+    <text class="e-head" x="820" y="448" text-anchor="middle">IDEATION ENGINE</text>
+    <text class="g-sub" x="820" y="470" text-anchor="middle">CD portal &mdash; one client connected at a time</text>
+
+    <rect class="e-row" x="640" y="490" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="514">1</text>
+    <text class="n-title" x="676" y="514">Connect</text>
+    <text class="n-sub" x="676" y="533">Client YouTube channel + knowledge base</text>
+
+    <rect class="e-row" x="640" y="556" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="580">2</text>
+    <text class="n-title" x="676" y="580">Pull</text>
+    <text class="n-sub" x="676" y="599">Research signals across every source</text>
+
+    <rect class="e-row" x="640" y="622" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="646">3</text>
+    <text class="n-title" x="676" y="646">Refine</text>
+    <text class="n-sub" x="676" y="665">Against the client's persona &amp; strategy</text>
+
+    <rect class="e-row" x="640" y="688" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="712">4</text>
+    <text class="n-title" x="676" y="712">Triangulate</text>
+    <text class="n-sub" x="676" y="731">Against DFM Ideation &amp; Craft Standards</text>
+
+    <rect class="e-row" x="640" y="754" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="778">5</text>
+    <text class="n-title" x="676" y="778">Benchmark</text>
+    <text class="n-sub" x="676" y="797">Against Turso cross-client patterns</text>
+
+    <!-- ============ OUTPUT: TOPIC SLATE ============ -->
+    <rect class="o-box" x="1200" y="300" width="400" height="232" rx="14"/>
+    <rect class="tick" x="1200" y="318" width="4" height="26" rx="2" fill="var(--green)"/>
+    <text class="g-head" x="1222" y="332">TOPIC SLATE</text>
+    <text class="g-sub" x="1222" y="352">Generated per client, per cycle</text>
+    <text class="n-title" x="1222" y="388">Vetted topics &mdash; on-strategy, on-brand</text>
+    <text class="n-title" x="1222" y="420">Sourced research brief &mdash; facts, angles, prior art</text>
+    <text class="n-title" x="1222" y="452">Sample packaging &mdash; title + thumbnail</text>
+    <text class="n-title" x="1222" y="482">Predictive score</text>
+    <text class="n-sub" x="1222" y="500">Calibrated to specific hooked up client</text>
+    <text class="n-sub" x="1222" y="516">Informed by the YouTube Performance Standard's locked target</text>
+
+    <!-- ============ THE VAULT ============ -->
+    <rect class="node" x="1700" y="380" width="220" height="88" rx="10"/>
+    <text class="n-title" x="1716" y="408">The Vault</text>
+    <text class="n-sub" x="1716" y="428">Qualifying topics not picked</text>
+    <text class="n-sub" x="1716" y="444">this cycle persist here</text>
+
+    <!-- ============ PRE-PRODUCTION ============ -->
+    <rect class="e-box" x="1200" y="560" width="400" height="338" rx="14"/>
+    <text class="e-head" x="1400" y="596" text-anchor="middle">PRE-PRODUCTION</text>
+    <text class="g-sub" x="1400" y="616" text-anchor="middle">Claude skills, per topic</text>
+
+    <rect class="e-row" x="1220" y="628" width="360" height="56" rx="8"/>
+    <text class="step-n" x="1236" y="652">1</text>
+    <text class="n-title" x="1256" y="652">Interview</text>
+    <text class="n-sub" x="1256" y="671">Interview skill mines the client on the topic</text>
+
+    <rect class="e-row" x="1220" y="694" width="360" height="56" rx="8"/>
+    <text class="step-n" x="1236" y="718">2</text>
+    <text class="n-title" x="1256" y="718">Concept</text>
+    <text class="n-sub" x="1256" y="737">Concept skill shapes the angle &amp; narrative arc</text>
+
+    <rect class="e-row" x="1220" y="760" width="360" height="56" rx="8"/>
+    <text class="step-n" x="1236" y="784">3</text>
+    <text class="n-title" x="1256" y="784">Script</text>
+    <text class="n-sub" x="1256" y="803">Scripting skill drafts in the client's voice</text>
+
+    <rect class="e-row" x="1220" y="826" width="360" height="56" rx="8"/>
+    <text class="step-n" x="1236" y="850">4</text>
+    <text class="n-title" x="1256" y="850">Standards gate</text>
+    <text class="n-sub" x="1256" y="869">Revise until Craft Standards are 100% met</text>
+
+    <!-- ============ DOWNSTREAM CHAIN ============ -->
+    <rect class="p-node" x="1200" y="928" width="400" height="56" rx="8"/>
+    <text class="n-title" x="1220" y="952">Production</text>
+    <text class="n-sub" x="1220" y="971">Shoot, edit, package</text>
+
+    <rect class="p-node" x="1200" y="1014" width="400" height="56" rx="8"/>
+    <text class="n-title" x="1220" y="1038">Publish</text>
+    <text class="n-sub" x="1220" y="1057">Every asset catalogued &amp; tracked</text>
+
+    <rect class="p-node" x="1200" y="1100" width="400" height="64" rx="8"/>
+    <text class="n-title" x="1220" y="1126">Track actual views</text>
+    <text class="n-sub" x="1220" y="1145">7-day snapshot &middot; 28-day re-check &middot; split-test results</text>
+
+    <rect class="p-node" x="1200" y="1194" width="400" height="72" rx="8"/>
+    <text class="n-title" x="1220" y="1220">Self-score the prediction</text>
+    <text class="n-sub" x="1220" y="1239">Called green/red vs the locked 7-day target?</text>
+    <text class="n-sub" x="1220" y="1256">28-day check upgrades slow burners &middot; accuracy target: 80%</text>
+
+    <!-- ============ SOLID FLOWS ============ -->
+    <path class="flow" d="M440,300 H530 V518 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,785 H555 V584 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,1020 H580 V716 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M1020,560 H1110 V400 H1190" marker-end="url(#arr)"/>
+    <path class="flow" d="M1600,420 H1692" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,532 V550" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,898 V918" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,984 V1004" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,1070 V1090" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,1164 V1184" marker-end="url(#arr)"/>
+    <path class="flow" d="M1200,1132 H540 V1085 H446" marker-end="url(#arr)"/>
+    <path class="flow" d="M540,1132 V1221 H446" marker-end="url(#arr)"/>
+    <text class="fl-t" x="870" y="1122" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
+
+    <!-- ============ FEEDBACK LOOPS ============ -->
+    <path class="fb" d="M1810,376 V240 H820 V404" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="1315" y="232" text-anchor="middle">Vault topics resurface in future pull cycles</text>
+
+    <path class="fb" d="M1200,1230 H950 V842" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="1010" y="1222" text-anchor="middle">Prediction accuracy tunes the model</text>
+
+    <path class="fb" d="M1400,1266 V1380 H240 V1340" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="820" y="1372" text-anchor="middle">7-day self-scores land in the prediction ledger &middot; Standards recalibrated monthly</text>
+
+    <path class="fb" d="M1480,1266 V1410 H16 V300 H34" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="760" y="1402" text-anchor="middle">Confirmed qualitative lessons write back to the client knowledge base</text>
+  </svg>
+  </div>
+
+  <div class="loops">
+    <div class="loop"><b>Knowledge base loop</b><span>Client sources refresh on their own cadence &mdash; calls biweekly, Slack &amp; Frame.io weekly, socials continuously &mdash; so the persona is always current.</span></div>
+    <div class="loop"><b>Tubular loop</b><span>A sequenced weekly routine re-runs each client's calibrated query for fresh, relevant topics.</span></div>
+    <div class="loop"><b>Vault loop</b><span>Qualifying topics that aren't picked persist in the Vault and resurface in future cycles instead of evaporating.</span></div>
+    <div class="loop"><b>Prediction loop</b><span>Every score is self-checked against the locked 7-day target (28-day check upgrades slow burners). Results are client-keyed, so scoring gets sharper per client.</span></div>
+    <div class="loop"><b>Standards loop</b><span>Ideation &amp; Craft Standards are updated monthly from performance data collected across the agency.</span></div>
+    <div class="loop"><b>Lessons loop</b><span>Qualitative takeaways (what this client approved, revised, or rejected) are confirmed by the CD and written back into the knowledge base.</span></div>
+  </div>
+</div>
+
+</html>
