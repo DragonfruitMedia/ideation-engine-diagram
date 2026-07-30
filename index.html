@@ -83,16 +83,6 @@
   .diagram { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 8px; }
   .diagram svg { display: block; min-width: 1200px; width: 100%; height: auto; overflow: visible; }
 
-  /* Hover zoom (transform applied via JS for cross-browser SVG support) */
-  .zx { transition: transform .2s ease; transform-box: fill-box; transform-origin: center; will-change: transform; }
-  .loop, .bubble { transition: transform .18s ease; transform-origin: center; }
-  .loop:hover { transform: scale(1.06); }
-  .bubble:hover { transform: scale(1.02); }
-  @media (prefers-reduced-motion: reduce) {
-    .zx, .loop, .bubble { transition: none; }
-    .zx:hover, .loop:hover, .bubble:hover { transform: none; }
-  }
-
   /* SVG classes */
   .g-box   { fill: var(--panel); stroke: var(--line); }
   .node    { fill: var(--card); stroke: var(--line); }
@@ -163,7 +153,6 @@
     <span class="item"><span class="key-dash"></span> Feedback loop</span>
     <span class="item"><span class="key-chip">WEEKLY</span> Refresh cadence</span>
     <span class="item"><span class="key-chip agent">AGENT</span> Automated agent</span>
-    <span class="item">Hover any section to zoom</span>
   </div>
 
   <div class="diagram">
@@ -482,19 +471,5 @@
   </div>
 </div>
 
-<script>
-(function () {
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.zx').forEach(function (g) {
-    g.addEventListener('mouseenter', function () {
-      g.parentNode.appendChild(g); // render above siblings
-      if (!reduced) g.style.transform = 'scale(1.25)';
-    });
-    g.addEventListener('mouseleave', function () {
-      g.style.transform = '';
-    });
-  });
-})();
-</script>
 
 </html>
