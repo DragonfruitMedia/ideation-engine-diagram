@@ -128,8 +128,11 @@
   .loop b { display: block; margin-bottom: 3px; }
   .loop span { color: var(--muted); }
 
+  .bubbles {
+    margin-top: 26px; display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
   .bubble {
-    margin-top: 26px;
     border: 1.5px solid var(--accent);
     background: var(--accent-soft);
     border-radius: 18px;
@@ -149,7 +152,7 @@
   <p class="eyebrow">Dragonfruit OS &middot; WhatBytes build</p>
   <h1>Ideation Engine &mdash; Workflow</h1>
   <p class="sec-label">What</p>
-  <p class="intro">One portal where a Creative Director connects a client's YouTube channel and knowledge base. The engine pulls a wide but curated data set, refines it against the client's persona and DFM's standards, and presents topics the CD iterates on live &mdash; a gamified loop that only ends when every standard is hit. Each locked topic ships with a research brief, sample packaging, and a client-calibrated predictive score, and the system self-scores against the YouTube Performance Standard's locked 7-day target.</p>
+  <p class="intro">One portal where a Creative Director connects a client's YouTube channel and knowledge base. The engine pulls a wide but curated data set, refines it against the client's persona and DFM's standards, and presents topics the CD iterates on live &mdash; a gamified loop that only ends when every standard is hit. Each locked topic ships with a research brief, sample packaging, and a client-calibrated predictive score, and the system self-scores against the YouTube Performance Standard's locked 7-day target. The goal isn't faster CDs &mdash; it's breaking the quality&harr;quantity tradeoff by 10&times;-ing research breadth and depth so synthesis happens naturally.</p>
   <p class="sec-label">How</p>
   <p class="intro">The Connect step scopes the client-specific layers &mdash; knowledge base, channel, calibration. The Dragonfruit proprietary data lake (Turso, A/B database, standards) is shared and read-only during ideation: every connected session benchmarks against the same cross-client pool. Writes back into Turso are keyed by client, so ten CDs running ten clients simultaneously never collide &mdash; they're reading one shared brain and writing to their own client's rows.</p>
   <p class="sec-label">The two-layer principle</p>
@@ -177,7 +180,7 @@
     <!-- ============ SOLID FLOWS ============ -->
     <path class="flow" d="M440,300 H530 V518 H610" marker-end="url(#arr)"/>
     <path class="flow" d="M440,853 H555 V592 H610" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,1156 H580 V732 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,1156 H580 V814 H610" marker-end="url(#arr)"/>
     <path class="flow" d="M1020,560 H1110 V400 H1190" marker-end="url(#arr)"/>
     <path class="flow" d="M1600,420 H1692" marker-end="url(#arr)"/>
     <path class="flow" d="M1400,532 V550" marker-end="url(#arr)"/>
@@ -193,7 +196,7 @@
     <path class="fb" d="M1810,376 V240 H820 V404" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1315" y="232" text-anchor="middle">Vault topics resurface in future pull cycles</text>
 
-    <path class="fb" d="M1200,1278 H950 V930" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1200,1278 H950 V1012" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1010" y="1270" text-anchor="middle">Prediction accuracy tunes the model</text>
 
     <path class="fb" d="M1400,1314 V1530 H240 V1490" marker-end="url(#arrfb)"/>
@@ -317,7 +320,7 @@
 
     <!-- ============ ENGINE ============ -->
     <g class="zx">
-    <rect class="e-box" x="620" y="410" width="400" height="508" rx="14"/>
+    <rect class="e-box" x="620" y="410" width="400" height="590" rx="14"/>
     <text class="e-head" x="820" y="448" text-anchor="middle">IDEATION ENGINE</text>
     <text class="g-sub" x="820" y="470" text-anchor="middle">CD portal &mdash; one client connected at a time</text>
 
@@ -334,28 +337,34 @@
     <rect class="a-chip" x="878" y="573" width="112" height="20" rx="10"/>
     <text class="a-t" x="934" y="587" text-anchor="middle">RESEARCH AGENT</text>
 
-    <rect class="e-row" x="640" y="638" width="360" height="56" rx="8"/>
+    <rect class="e-row" x="640" y="638" width="360" height="72" rx="8"/>
     <text class="step-n" x="656" y="662">3</text>
-    <text class="n-title" x="676" y="662">Refine</text>
-    <text class="n-sub" x="676" y="681">Against the client's persona &amp; strategy</text>
+    <text class="n-title" x="676" y="662">Psychographic Profile Demand Map</text>
+    <text class="n-sub" x="676" y="681">Pain points &amp; aspirations extrapolated from outliers</text>
+    <text class="n-sub" x="676" y="696">+ competitor map &mdash; supply landscape, on &amp; off YouTube</text>
 
-    <rect class="e-row" x="640" y="704" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="728">4</text>
-    <text class="n-title" x="676" y="728">Triangulate</text>
-    <text class="n-sub" x="676" y="747">Against DFM Ideation &amp; Craft Standards</text>
+    <rect class="e-row" x="640" y="720" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="744">4</text>
+    <text class="n-title" x="676" y="744">Refine</text>
+    <text class="n-sub" x="676" y="763">Persona, strategy &amp; true expertise fit</text>
 
-    <rect class="e-row" x="640" y="770" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="794">5</text>
-    <text class="n-title" x="676" y="794">Benchmark</text>
-    <text class="n-sub" x="676" y="813">Against Turso cross-client data</text>
-    <rect class="a-chip" x="886" y="787" width="104" height="20" rx="10"/>
-    <text class="a-t" x="938" y="801" text-anchor="middle">SCORING AGENT</text>
+    <rect class="e-row" x="640" y="786" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="810">5</text>
+    <text class="n-title" x="676" y="810">Triangulate</text>
+    <text class="n-sub" x="676" y="829">Against DFM Ideation &amp; Craft Standards</text>
 
-    <rect class="e-row" x="640" y="836" width="360" height="66" rx="8"/>
-    <text class="step-n" x="656" y="860">6</text>
-    <text class="n-title" x="676" y="860">Present &amp; iterate</text>
-    <text class="n-sub" x="676" y="878">Topics surface to the CD, who refines live with the</text>
-    <text class="n-sub" x="676" y="893">engine &mdash; gamified &mdash; until every standard is hit</text>
+    <rect class="e-row" x="640" y="852" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="876">6</text>
+    <text class="n-title" x="676" y="876">Benchmark</text>
+    <text class="n-sub" x="676" y="895">Against Turso cross-client data</text>
+    <rect class="a-chip" x="886" y="869" width="104" height="20" rx="10"/>
+    <text class="a-t" x="938" y="883" text-anchor="middle">SCORING AGENT</text>
+
+    <rect class="e-row" x="640" y="918" width="360" height="66" rx="8"/>
+    <text class="step-n" x="656" y="942">7</text>
+    <text class="n-title" x="676" y="942">Present &amp; iterate</text>
+    <text class="n-sub" x="676" y="960">Topics surface to the CD, who refines live with the</text>
+    <text class="n-sub" x="676" y="975">engine &mdash; gamified &mdash; until every standard is hit</text>
     </g>
 
     <!-- ============ OUTPUT: TOPIC SLATE ============ -->
@@ -449,6 +458,7 @@
     <div class="loop"><b>Lessons loop</b><span>Qualitative takeaways (what this client approved, revised, or rejected) are confirmed by the CD and written back into the knowledge base.</span></div>
   </div>
 
+  <div class="bubbles">
   <div class="bubble">
     <h2>Gamified CD portal &mdash; design notes</h2>
     <ul>
@@ -458,6 +468,17 @@
       <li><b>The meta-game.</b> Track each CD's calling average &mdash; how often their locked topics actually went green at 7 days &mdash; plus a smash-line counter for videos past 2&times; target. Prediction accuracy becomes the CD's score too, not just the model's.</li>
       <li><b>Deliberately excluded:</b> leaderboards ranking CDs against each other. Channels differ wildly in difficulty and the multiple absorbs that difference, so the game is always CD-vs-the-bar, never CD-vs-CD.</li>
     </ul>
+  </div>
+
+  <div class="bubble">
+    <h2>Engine design rules</h2>
+    <ul>
+      <li><b>No comment mining.</b> Comments are under 1% of viewers and a self-selecting group (superfans and haters) &mdash; noise, not demand. Engagement rate is an acceptable signal; comment content is not.</li>
+      <li><b>Expertise-fit is a hard filter.</b> Demand only counts if the client can genuinely deliver on it. Chasing demand the client can't credibly serve produces faked videos that fail &mdash; validate against what they're truly expert in.</li>
+      <li><b>Demand over supply.</b> Don't just clone viral videos. Use outliers to extrapolate the audience's pain points and aspirations, then ideate from those problems &mdash; including combining two demand signals into one original concept.</li>
+      <li><b>The recency rule.</b> A client's new topic suggestion (Slack or the living survey) must surface in the very next ideation round &mdash; or get an explicit CD response explaining why not. Silence reads as being ignored.</li>
+    </ul>
+  </div>
   </div>
 </div>
 
