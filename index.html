@@ -57,7 +57,11 @@
   }
   .intro {
     font-size: 15px; line-height: 1.5; color: var(--muted);
-    margin: 0 0 22px;
+    margin: 0 0 18px;
+  }
+  .sec-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 4px;
   }
 
   .legend {
@@ -118,7 +122,10 @@
 <div class="wrap">
   <p class="eyebrow">Dragonfruit OS &middot; WhatBytes build</p>
   <h1>Ideation Engine &mdash; Workflow</h1>
+  <p class="sec-label">What</p>
   <p class="intro">One portal where a Creative Director connects a client's YouTube channel and knowledge base. The engine pulls a wide but curated data set, refines it against the client's persona and DFM's standards, and presents topics the CD iterates on live &mdash; a gamified loop that only ends when every standard is hit. Each locked topic ships with a research brief, sample packaging, and a client-calibrated predictive score, and the system self-scores against the YouTube Performance Standard's locked 7-day target.</p>
+  <p class="sec-label">How</p>
+  <p class="intro">The Connect step scopes the client-specific layers &mdash; knowledge base, channel, calibration. The Dragonfruit proprietary data lake (Turso, A/B database, standards) is shared and read-only during ideation: every connected session benchmarks against the same cross-client pool. Writes back into Turso are keyed by client, so ten CDs running ten clients simultaneously never collide &mdash; they're reading one shared brain and writing to their own client's rows.</p>
 
   <div class="legend">
     <span class="item"><span class="key-solid"></span> Data flow</span>
@@ -295,49 +302,51 @@
     <text class="n-sub" x="1716" y="444">this cycle persist here</text>
 
     <!-- ============ PRE-PRODUCTION ============ -->
-    <rect class="e-box" x="1200" y="560" width="400" height="338" rx="14"/>
+    <rect class="e-box" x="1200" y="560" width="400" height="370" rx="14"/>
     <text class="e-head" x="1400" y="596" text-anchor="middle">PRE-PRODUCTION</text>
     <text class="g-sub" x="1400" y="616" text-anchor="middle">Claude skills with human gate</text>
 
-    <rect class="e-row" x="1220" y="628" width="360" height="56" rx="8"/>
+    <rect class="e-row" x="1220" y="628" width="360" height="72" rx="8"/>
     <text class="step-n" x="1236" y="652">1</text>
     <text class="n-title" x="1256" y="652">Interview</text>
-    <text class="n-sub" x="1256" y="671">Interview skill mines the client on the topic</text>
+    <text class="n-sub" x="1256" y="671">One question at a time &middot; needs 2&ndash;3 specific stories</text>
+    <text class="n-sub" x="1256" y="686">Panel: Ferriss&middot;Rogan&middot;King&middot;Stern&middot;Barbaro&middot;Walters</text>
 
-    <rect class="e-row" x="1220" y="694" width="360" height="56" rx="8"/>
-    <text class="step-n" x="1236" y="718">2</text>
-    <text class="n-title" x="1256" y="718">Concept</text>
-    <text class="n-sub" x="1256" y="737">Concept skill shapes the angle &amp; narrative arc</text>
+    <rect class="e-row" x="1220" y="710" width="360" height="56" rx="8"/>
+    <text class="step-n" x="1236" y="734">2</text>
+    <text class="n-title" x="1256" y="734">Concept</text>
+    <text class="n-sub" x="1256" y="753">Concept skill shapes the angle &amp; narrative arc</text>
 
-    <rect class="e-row" x="1220" y="760" width="360" height="56" rx="8"/>
-    <text class="step-n" x="1236" y="784">3</text>
-    <text class="n-title" x="1256" y="784">Script</text>
-    <text class="n-sub" x="1256" y="803">Scripting skill drafts in the client's voice</text>
+    <rect class="e-row" x="1220" y="776" width="360" height="56" rx="8"/>
+    <text class="step-n" x="1236" y="800">3</text>
+    <text class="n-title" x="1256" y="800">Script</text>
+    <text class="n-sub" x="1256" y="819">Scripting skill drafts in the client's voice</text>
 
-    <rect class="e-row" x="1220" y="826" width="360" height="56" rx="8"/>
-    <text class="step-n" x="1236" y="850">4</text>
-    <text class="n-title" x="1256" y="850">Standards gate</text>
-    <text class="n-sub" x="1256" y="869">Revise until Craft Standards are 100% met</text>
+    <rect class="e-row" x="1220" y="842" width="360" height="72" rx="8"/>
+    <text class="step-n" x="1236" y="866">4</text>
+    <text class="n-title" x="1256" y="866">Standards gate &mdash; 100% met</text>
+    <text class="n-sub" x="1256" y="885">Council scores drafts &middot; gaps route back to interview</text>
+    <text class="n-sub" x="1256" y="900">Housel&middot;Urban&middot;Puri&middot;Isenberg&middot;Perell&middot;Slop Detector</text>
 
     <!-- ============ DOWNSTREAM CHAIN ============ -->
-    <rect class="p-node" x="1200" y="928" width="400" height="56" rx="8"/>
-    <text class="n-title" x="1220" y="952">Production</text>
-    <text class="n-sub" x="1220" y="971">Shoot, edit, package (videos go through their own standards)</text>
+    <rect class="p-node" x="1200" y="960" width="400" height="56" rx="8"/>
+    <text class="n-title" x="1220" y="984">Production</text>
+    <text class="n-sub" x="1220" y="1003">Shoot, edit, package (videos go through their own standards)</text>
 
-    <rect class="p-node" x="1200" y="1014" width="400" height="56" rx="8"/>
-    <text class="n-title" x="1220" y="1038">Publish</text>
-    <text class="n-sub" x="1220" y="1057">Every asset catalogued &amp; tracked</text>
+    <rect class="p-node" x="1200" y="1046" width="400" height="56" rx="8"/>
+    <text class="n-title" x="1220" y="1070">Publish</text>
+    <text class="n-sub" x="1220" y="1089">Every asset catalogued &amp; tracked</text>
 
-    <rect class="p-node" x="1200" y="1100" width="400" height="64" rx="8"/>
-    <text class="n-title" x="1220" y="1126">Track actual views</text>
-    <text class="n-sub" x="1220" y="1145">7 &amp; 28-day snapshots &middot; A/B results</text>
-    <rect class="a-chip" x="1462" y="1117" width="114" height="20" rx="10"/>
-    <text class="a-t" x="1519" y="1131" text-anchor="middle">TRACKING AGENT</text>
+    <rect class="p-node" x="1200" y="1132" width="400" height="64" rx="8"/>
+    <text class="n-title" x="1220" y="1158">Track actual views</text>
+    <text class="n-sub" x="1220" y="1177">7 &amp; 28-day snapshots &middot; A/B results</text>
+    <rect class="a-chip" x="1462" y="1149" width="114" height="20" rx="10"/>
+    <text class="a-t" x="1519" y="1163" text-anchor="middle">TRACKING AGENT</text>
 
-    <rect class="p-node" x="1200" y="1194" width="400" height="72" rx="8"/>
-    <text class="n-title" x="1220" y="1220">Self-score the prediction</text>
-    <text class="n-sub" x="1220" y="1239">Called green/red vs the locked 7-day target?</text>
-    <text class="n-sub" x="1220" y="1256">28-day check upgrades slow burners &middot; accuracy target: 80%</text>
+    <rect class="p-node" x="1200" y="1226" width="400" height="72" rx="8"/>
+    <text class="n-title" x="1220" y="1252">Self-score the prediction</text>
+    <text class="n-sub" x="1220" y="1271">Called green/red vs the locked 7-day target?</text>
+    <text class="n-sub" x="1220" y="1288">28-day check upgrades slow burners &middot; accuracy target: 80%</text>
 
     <!-- ============ SOLID FLOWS ============ -->
     <path class="flow" d="M440,300 H530 V518 H610" marker-end="url(#arr)"/>
@@ -346,25 +355,25 @@
     <path class="flow" d="M1020,560 H1110 V400 H1190" marker-end="url(#arr)"/>
     <path class="flow" d="M1600,420 H1692" marker-end="url(#arr)"/>
     <path class="flow" d="M1400,532 V550" marker-end="url(#arr)"/>
-    <path class="flow" d="M1400,898 V918" marker-end="url(#arr)"/>
-    <path class="flow" d="M1400,984 V1004" marker-end="url(#arr)"/>
-    <path class="flow" d="M1400,1070 V1090" marker-end="url(#arr)"/>
-    <path class="flow" d="M1400,1164 V1184" marker-end="url(#arr)"/>
-    <path class="flow" d="M1200,1132 H540 V1085 H446" marker-end="url(#arr)"/>
-    <path class="flow" d="M540,1132 V1221 H446" marker-end="url(#arr)"/>
-    <text class="fl-t" x="870" y="1122" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
+    <path class="flow" d="M1400,930 V950" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,1016 V1036" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,1102 V1122" marker-end="url(#arr)"/>
+    <path class="flow" d="M1400,1196 V1216" marker-end="url(#arr)"/>
+    <path class="flow" d="M1200,1164 H540 V1085 H446" marker-end="url(#arr)"/>
+    <path class="flow" d="M540,1164 V1221 H446" marker-end="url(#arr)"/>
+    <text class="fl-t" x="870" y="1154" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
 
     <!-- ============ FEEDBACK LOOPS ============ -->
     <path class="fb" d="M1810,376 V240 H820 V404" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1315" y="232" text-anchor="middle">Vault topics resurface in future pull cycles</text>
 
-    <path class="fb" d="M1200,1230 H950 V914" marker-end="url(#arrfb)"/>
-    <text class="fb-t" x="1010" y="1222" text-anchor="middle">Prediction accuracy tunes the model</text>
+    <path class="fb" d="M1200,1262 H950 V914" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="1010" y="1254" text-anchor="middle">Prediction accuracy tunes the model</text>
 
-    <path class="fb" d="M1400,1266 V1380 H240 V1340" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1400,1298 V1380 H240 V1340" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="820" y="1372" text-anchor="middle">7-day self-scores land in the prediction ledger &middot; Standards recalibrated monthly</text>
 
-    <path class="fb" d="M1480,1266 V1410 H16 V300 H34" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1480,1298 V1410 H16 V300 H34" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="760" y="1402" text-anchor="middle">Confirmed qualitative lessons write back to the client knowledge base</text>
   </svg>
   </div>
