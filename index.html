@@ -81,7 +81,7 @@
   .key-chip.agent { color: var(--accent); background: var(--accent-soft); }
 
   .diagram { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 8px; }
-  .diagram svg { display: block; min-width: 1200px; width: 100%; height: auto; overflow: visible; }
+  .diagram svg { display: block; min-width: 1200px; width: 100%; height: auto; }
 
   /* SVG classes */
   .g-box   { fill: var(--panel); stroke: var(--line); }
@@ -156,7 +156,7 @@
   </div>
 
   <div class="diagram">
-  <svg viewBox="0 0 1960 1610" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow diagram of the Dragonfruit ideation engine">
+  <svg viewBox="0 0 1960 1680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow diagram of the Dragonfruit ideation engine">
     <defs>
       <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
         <path d="M0,0 L10,5 L0,10 z" fill="var(--flow-strong)"/>
@@ -167,9 +167,9 @@
     </defs>
 
     <!-- ============ SOLID FLOWS ============ -->
-    <path class="flow" d="M440,300 H530 V518 H610" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,853 H555 V600 H610" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,1156 H580 V830 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,340 H530 V518 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,921 H555 V608 H610" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,1224 H500 V928 H610" marker-end="url(#arr)"/>
     <path class="flow" d="M1020,560 H1110 V400 H1190" marker-end="url(#arr)"/>
     <path class="flow" d="M1600,420 H1692" marker-end="url(#arr)"/>
     <path class="flow" d="M1400,532 V550" marker-end="url(#arr)"/>
@@ -177,26 +177,26 @@
     <path class="flow" d="M1400,1032 V1052" marker-end="url(#arr)"/>
     <path class="flow" d="M1400,1118 V1138" marker-end="url(#arr)"/>
     <path class="flow" d="M1400,1212 V1232" marker-end="url(#arr)"/>
-    <path class="flow" d="M1200,1180 H540 V1221 H446" marker-end="url(#arr)"/>
-    <path class="flow" d="M540,1180 V1371 H446" marker-end="url(#arr)"/>
+    <path class="flow" d="M1200,1180 H540 V1284 H446" marker-end="url(#arr)"/>
+    <path class="flow" d="M540,1180 V1450 H446" marker-end="url(#arr)"/>
     <text class="fl-t" x="870" y="1170" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
 
     <!-- ============ FEEDBACK LOOPS ============ -->
     <path class="fb" d="M1810,376 V240 H820 V404" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1315" y="232" text-anchor="middle">Vault topics resurface in future pull cycles</text>
 
-    <path class="fb" d="M1200,1278 H950 V1028" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1200,1278 H950 V1126" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="1010" y="1270" text-anchor="middle">Prediction accuracy tunes the model</text>
 
-    <path class="fb" d="M1400,1314 V1530 H240 V1490" marker-end="url(#arrfb)"/>
-    <text class="fb-t" x="820" y="1522" text-anchor="middle">7-day self-scores land in the prediction ledger &middot; Standards recalibrated monthly</text>
+    <path class="fb" d="M1400,1314 V1600 H240 V1574" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="820" y="1592" text-anchor="middle">7-day self-scores land in the prediction ledger &middot; Standards recalibrated monthly</text>
 
-    <path class="fb" d="M1480,1314 V1560 H16 V300 H34" marker-end="url(#arrfb)"/>
-    <text class="fb-t" x="760" y="1552" text-anchor="middle">Confirmed qualitative lessons write back to the client knowledge base</text>
+    <path class="fb" d="M1480,1314 V1630 H16 V300 H34" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="760" y="1622" text-anchor="middle">Confirmed qualitative lessons write back to the client knowledge base</text>
 
     <!-- ============ GROUP A: CLIENT KNOWLEDGE BASE ============ -->
     <g>
-    <rect class="g-box" x="40" y="30" width="400" height="552" rx="12"/>
+    <rect class="g-box" x="40" y="30" width="400" height="620" rx="12"/>
     <rect class="tick" x="40" y="46" width="4" height="26" rx="2"/>
     <text class="g-head" x="62" y="60">CLIENT KNOWLEDGE BASE</text>
     <text class="g-sub" x="62" y="80">Per-client &middot; always current</text>
@@ -210,106 +210,111 @@
     <text class="n-sub" x="76" y="143">Client-provided voice &amp; tone walkthroughs</text>
 
     <rect class="node" x="60" y="168" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="192">Kick-off survey (living)</text>
-    <text class="n-sub" x="76" y="211">Client-editable fields &mdash; feed the next ideation round</text>
+    <text class="n-title" x="76" y="192">Voice guide</text>
+    <text class="n-sub" x="76" y="211">Codified from the client's top-performing content</text>
 
     <rect class="node" x="60" y="236" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="260">Client call transcripts</text>
-    <text class="n-sub" x="76" y="279">Grain &mdash; auto-scraped</text>
-    <rect class="chip" x="330" y="253" width="76" height="20" rx="10"/>
-    <text class="chip-t" x="368" y="267" text-anchor="middle">BIWEEKLY</text>
+    <text class="n-title" x="76" y="260">Kick-off survey (living)</text>
+    <text class="n-sub" x="76" y="279">Client-editable fields &mdash; feed the next ideation round</text>
 
     <rect class="node" x="60" y="304" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="328">Slack feedback</text>
-    <text class="n-sub" x="76" y="347">Client channel comments &amp; requests</text>
-    <rect class="chip" x="340" y="321" width="66" height="20" rx="10"/>
-    <text class="chip-t" x="373" y="335" text-anchor="middle">WEEKLY</text>
+    <text class="n-title" x="76" y="328">Client call transcripts</text>
+    <text class="n-sub" x="76" y="347">Grain &mdash; auto-scraped</text>
+    <rect class="chip" x="330" y="321" width="76" height="20" rx="10"/>
+    <text class="chip-t" x="368" y="335" text-anchor="middle">BIWEEKLY</text>
 
     <rect class="node" x="60" y="372" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="396">Frame.io comments</text>
-    <text class="n-sub" x="76" y="415">Client feedback on video reviews</text>
+    <text class="n-title" x="76" y="396">Slack feedback</text>
+    <text class="n-sub" x="76" y="415">Client channel comments &amp; requests</text>
     <rect class="chip" x="340" y="389" width="66" height="20" rx="10"/>
     <text class="chip-t" x="373" y="403" text-anchor="middle">WEEKLY</text>
 
     <rect class="node" x="60" y="440" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="464">Social persona scrape</text>
-    <text class="n-sub" x="76" y="483">Instagram &middot; Facebook &middot; X &middot; LinkedIn</text>
-    <rect class="chip" x="314" y="450" width="92" height="20" rx="10"/>
-    <text class="chip-t" x="360" y="464" text-anchor="middle">CONTINUOUS</text>
+    <text class="n-title" x="76" y="464">Frame.io comments</text>
+    <text class="n-sub" x="76" y="483">Client feedback on video reviews</text>
+    <rect class="chip" x="340" y="457" width="66" height="20" rx="10"/>
+    <text class="chip-t" x="373" y="471" text-anchor="middle">WEEKLY</text>
 
     <rect class="node" x="60" y="508" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="532">Published video transcripts</text>
-    <text class="n-sub" x="76" y="551">Every video on the client's YouTube channel</text>
+    <text class="n-title" x="76" y="532">Social persona scrape</text>
+    <text class="n-sub" x="76" y="551">Instagram &middot; Facebook &middot; X &middot; LinkedIn</text>
+    <rect class="chip" x="314" y="518" width="92" height="20" rx="10"/>
+    <text class="chip-t" x="360" y="532" text-anchor="middle">CONTINUOUS</text>
+
+    <rect class="node" x="60" y="576" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="600">Published video transcripts</text>
+    <text class="n-sub" x="76" y="619">Every video on the client's YouTube channel</text>
     </g>
 
     <!-- ============ GROUP B: MARKET & RESEARCH SIGNALS ============ -->
     <g>
-    <rect class="g-box" x="40" y="612" width="400" height="482" rx="12"/>
-    <rect class="tick" x="40" y="628" width="4" height="26" rx="2"/>
-    <text class="g-head" x="62" y="642">MARKET &amp; RESEARCH SIGNALS</text>
-    <text class="g-sub" x="62" y="662">Outlier engines on CD keywords &middot; multiplier vs baseline</text>
-
-    <rect class="node" x="60" y="680" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="704">Client YouTube channel</text>
-    <text class="n-sub" x="76" y="723">Public analytics &amp; channel demand &mdash; connected in portal</text>
+    <rect class="g-box" x="40" y="680" width="400" height="482" rx="12"/>
+    <rect class="tick" x="40" y="696" width="4" height="26" rx="2"/>
+    <text class="g-head" x="62" y="710">MARKET &amp; RESEARCH SIGNALS</text>
+    <text class="g-sub" x="62" y="730">Outlier engines on CD keywords &middot; multiplier vs baseline</text>
 
     <rect class="node" x="60" y="748" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="772">YouTube outliers</text>
-    <text class="n-sub" x="76" y="791">10&ndash;100&times; a channel's baseline &middot; 1of10 + ViewStats</text>
+    <text class="n-title" x="76" y="772">Client YouTube channel</text>
+    <text class="n-sub" x="76" y="791">Public analytics &amp; channel demand &mdash; connected in portal</text>
 
     <rect class="node" x="60" y="816" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="840">LinkedIn outliers</text>
-    <text class="n-sub" x="76" y="859">Posts that massively beat the author's baseline</text>
+    <text class="n-title" x="76" y="840">YouTube outliers</text>
+    <text class="n-sub" x="76" y="859">10&ndash;100&times; a channel's baseline &middot; 1of10 + ViewStats</text>
 
     <rect class="node" x="60" y="884" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="908">Reddit outliers</text>
-    <text class="n-sub" x="76" y="927">Threads outperforming their subreddit's norm</text>
+    <text class="n-title" x="76" y="908">LinkedIn outliers</text>
+    <text class="n-sub" x="76" y="927">Posts that massively beat the author's baseline</text>
 
     <rect class="node" x="60" y="952" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="976">Google SEO</text>
-    <text class="n-sub" x="76" y="995">Search &amp; Trends demand on CD keywords</text>
+    <text class="n-title" x="76" y="976">Reddit outliers</text>
+    <text class="n-sub" x="76" y="995">Threads outperforming their subreddit's norm</text>
 
     <rect class="node" x="60" y="1020" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="1044">Calibrated Tubular query</text>
-    <text class="n-sub" x="76" y="1063">Instagram &middot; TikTok &middot; YouTube</text>
-    <rect class="chip" x="340" y="1024" width="66" height="20" rx="10"/>
-    <text class="chip-t" x="373" y="1038" text-anchor="middle">WEEKLY</text>
-    <rect class="a-chip" x="302" y="1048" width="104" height="20" rx="10"/>
-    <text class="a-t" x="354" y="1062" text-anchor="middle">TUBULAR AGENT</text>
+    <text class="n-title" x="76" y="1044">Google SEO</text>
+    <text class="n-sub" x="76" y="1063">Search &amp; Trends demand on CD keywords</text>
+
+    <rect class="node" x="60" y="1088" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1112">Calibrated Tubular query</text>
+    <text class="n-sub" x="76" y="1131">Instagram &middot; TikTok &middot; YouTube</text>
+    <rect class="chip" x="340" y="1092" width="66" height="20" rx="10"/>
+    <text class="chip-t" x="373" y="1106" text-anchor="middle">WEEKLY</text>
+    <rect class="a-chip" x="302" y="1116" width="104" height="20" rx="10"/>
+    <text class="a-t" x="354" y="1130" text-anchor="middle">TUBULAR AGENT</text>
     </g>
 
     <!-- ============ GROUP C: DRAGONFRUIT PROPRIETARY DATA LAKE ============ -->
     <g>
-    <rect class="g-box" x="40" y="1124" width="400" height="360" rx="12"/>
-    <rect class="tick" x="40" y="1140" width="4" height="26" rx="2"/>
-    <text class="g-head" x="62" y="1154">DRAGONFRUIT PROPRIETARY DATA LAKE</text>
-    <text class="g-sub" x="62" y="1174">Cross-client intelligence</text>
+    <rect class="g-box" x="40" y="1192" width="400" height="376" rx="12"/>
+    <rect class="tick" x="40" y="1208" width="4" height="26" rx="2"/>
+    <text class="g-head" x="62" y="1222">DRAGONFRUIT PROPRIETARY DATA LAKE</text>
+    <text class="g-sub" x="62" y="1242">Cross-client intelligence</text>
 
-    <rect class="node" x="60" y="1192" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="1216">Turso Performance Database</text>
-    <text class="n-sub" x="76" y="1235">7 &amp; 28-day snapshots, targets, statuses &mdash; all clients</text>
+    <rect class="node" x="60" y="1260" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1284">Turso Performance Database</text>
+    <text class="n-sub" x="76" y="1303">7 &amp; 28-day snapshots, targets, statuses &mdash; all clients</text>
 
-    <rect class="node" x="60" y="1260" width="360" height="72" rx="8"/>
-    <text class="n-title" x="76" y="1284">Prediction ledger</text>
-    <text class="n-sub" x="76" y="1303">Score &middot; model version &middot; locked target &mdash; in Turso</text>
-    <text class="n-sub" x="76" y="1318">CDs are graded against this on review cycles</text>
+    <rect class="node" x="60" y="1328" width="360" height="88" rx="8"/>
+    <text class="n-title" x="76" y="1352">Prediction ledger</text>
+    <text class="n-sub" x="76" y="1371">Score &middot; model version &middot; locked target &mdash; in Turso</text>
+    <text class="n-sub" x="76" y="1386">CDs are graded against this on review cycles</text>
+    <text class="n-sub" x="76" y="1401">Per-client outlier band &mdash; stored &amp; recalibrated</text>
 
-    <rect class="node" x="60" y="1342" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="1366">A/B Testing Database</text>
-    <text class="n-sub" x="76" y="1385">Packaging split-test results &mdash; titles &amp; thumbnails</text>
+    <rect class="node" x="60" y="1426" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1450">A/B Testing Database</text>
+    <text class="n-sub" x="76" y="1469">Packaging split-test results &mdash; titles &amp; thumbnails</text>
 
-    <rect class="node" x="60" y="1410" width="360" height="58" rx="8"/>
-    <text class="n-title" x="76" y="1434">Ideation &amp; Craft Standards</text>
-    <text class="n-sub" x="76" y="1453">Concept &middot; audience &middot; packaging</text>
-    <rect class="chip" x="330" y="1414" width="76" height="20" rx="10"/>
-    <text class="chip-t" x="368" y="1428" text-anchor="middle">MONTHLY</text>
-    <rect class="a-chip" x="270" y="1438" width="136" height="20" rx="10"/>
-    <text class="a-t" x="338" y="1452" text-anchor="middle">RECALIBRATION AGENT</text>
+    <rect class="node" x="60" y="1494" width="360" height="58" rx="8"/>
+    <text class="n-title" x="76" y="1518">Ideation &amp; Craft Standards</text>
+    <text class="n-sub" x="76" y="1537">Concept &middot; audience &middot; packaging</text>
+    <rect class="chip" x="330" y="1498" width="76" height="20" rx="10"/>
+    <text class="chip-t" x="368" y="1512" text-anchor="middle">MONTHLY</text>
+    <rect class="a-chip" x="270" y="1522" width="136" height="20" rx="10"/>
+    <text class="a-t" x="338" y="1536" text-anchor="middle">RECALIBRATION AGENT</text>
     </g>
 
     <!-- ============ ENGINE ============ -->
     <g>
-    <rect class="e-box" x="620" y="410" width="400" height="606" rx="14"/>
+    <rect class="e-box" x="620" y="410" width="400" height="704" rx="14"/>
     <text class="e-head" x="820" y="448" text-anchor="middle">IDEATION ENGINE</text>
     <text class="g-sub" x="820" y="470" text-anchor="middle">CD portal &mdash; one client connected at a time</text>
 
@@ -318,43 +323,50 @@
     <text class="n-title" x="676" y="514">Connect</text>
     <text class="n-sub" x="676" y="533">Client YouTube channel + knowledge base</text>
 
-    <rect class="e-row" x="640" y="556" width="360" height="88" rx="8"/>
+    <rect class="e-row" x="640" y="556" width="360" height="104" rx="8"/>
     <text class="step-n" x="656" y="580">2</text>
     <text class="n-title" x="676" y="580">Pull</text>
     <text class="n-sub" x="676" y="599">1 &middot; Engine-run: query drafted from the knowledge base</text>
     <text class="n-sub" x="676" y="614">2 &middot; CD-run: the CD cues up their own query</text>
-    <text class="n-sub" x="676" y="629">Spike scan &mdash; fresh client moments worth a video</text>
+    <text class="n-sub" x="676" y="629">Spike &amp; sequel scan &mdash; fresh moments, past outliers</text>
+    <text class="n-sub" x="676" y="644">Whitespace-first reverse discovery (views-per-video)</text>
     <rect class="a-chip" x="878" y="573" width="112" height="20" rx="10"/>
     <text class="a-t" x="934" y="587" text-anchor="middle">RESEARCH AGENT</text>
 
-    <rect class="e-row" x="640" y="654" width="360" height="72" rx="8"/>
-    <text class="step-n" x="656" y="678">3</text>
-    <text class="n-title" x="676" y="678">Psychographic Profile Demand Map</text>
-    <text class="n-sub" x="676" y="697">Pain points &amp; aspirations extrapolated from outliers</text>
-    <text class="n-sub" x="676" y="712">+ competitor map &mdash; supply landscape, on &amp; off YouTube</text>
+    <rect class="e-row" x="640" y="670" width="360" height="72" rx="8"/>
+    <text class="step-n" x="656" y="694">3</text>
+    <text class="n-title" x="676" y="694">Psychographic Profile Demand Map</text>
+    <text class="n-sub" x="676" y="713">Pain points &amp; aspirations extrapolated from outliers</text>
+    <text class="n-sub" x="676" y="728">+ competitor map &mdash; supply landscape, on &amp; off YouTube</text>
 
-    <rect class="e-row" x="640" y="736" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="760">4</text>
-    <text class="n-title" x="676" y="760">Refine</text>
-    <text class="n-sub" x="676" y="779">Persona, strategy &amp; true expertise fit</text>
+    <rect class="e-row" x="640" y="752" width="360" height="72" rx="8"/>
+    <text class="step-n" x="656" y="776">4</text>
+    <text class="n-title" x="676" y="776">Validate &mdash; greenlight gates</text>
+    <text class="n-sub" x="676" y="795">Real &middot; Organic &middot; Portable &middot; Durable &mdash; theme-level</text>
+    <text class="n-sub" x="676" y="810">Gates inform; the CD decides</text>
 
-    <rect class="e-row" x="640" y="802" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="826">5</text>
-    <text class="n-title" x="676" y="826">Triangulate</text>
-    <text class="n-sub" x="676" y="845">Against DFM Ideation &amp; Craft Standards</text>
+    <rect class="e-row" x="640" y="834" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="858">5</text>
+    <text class="n-title" x="676" y="858">Refine</text>
+    <text class="n-sub" x="676" y="877">Persona, strategy &amp; true expertise fit</text>
 
-    <rect class="e-row" x="640" y="868" width="360" height="56" rx="8"/>
-    <text class="step-n" x="656" y="892">6</text>
-    <text class="n-title" x="676" y="892">Benchmark</text>
-    <text class="n-sub" x="676" y="911">Against Turso cross-client data</text>
-    <rect class="a-chip" x="886" y="885" width="104" height="20" rx="10"/>
-    <text class="a-t" x="938" y="899" text-anchor="middle">SCORING AGENT</text>
+    <rect class="e-row" x="640" y="900" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="924">6</text>
+    <text class="n-title" x="676" y="924">Triangulate</text>
+    <text class="n-sub" x="676" y="943">Against DFM Ideation &amp; Craft Standards</text>
 
-    <rect class="e-row" x="640" y="934" width="360" height="66" rx="8"/>
-    <text class="step-n" x="656" y="958">7</text>
-    <text class="n-title" x="676" y="958">Present &amp; iterate</text>
-    <text class="n-sub" x="676" y="976">Topics surface to the CD, who refines live with the</text>
-    <text class="n-sub" x="676" y="991">engine &mdash; gamified &mdash; until every standard is hit</text>
+    <rect class="e-row" x="640" y="966" width="360" height="56" rx="8"/>
+    <text class="step-n" x="656" y="990">7</text>
+    <text class="n-title" x="676" y="990">Benchmark</text>
+    <text class="n-sub" x="676" y="1009">Against Turso cross-client data</text>
+    <rect class="a-chip" x="886" y="983" width="104" height="20" rx="10"/>
+    <text class="a-t" x="938" y="997" text-anchor="middle">SCORING AGENT</text>
+
+    <rect class="e-row" x="640" y="1032" width="360" height="66" rx="8"/>
+    <text class="step-n" x="656" y="1056">8</text>
+    <text class="n-title" x="676" y="1056">Present &amp; iterate</text>
+    <text class="n-sub" x="676" y="1074">Topics surface to the CD, who refines live with the</text>
+    <text class="n-sub" x="676" y="1089">engine &mdash; gamified &mdash; until every standard is hit</text>
     </g>
 
     <!-- ============ OUTPUT: TOPIC SLATE ============ -->
@@ -466,11 +478,13 @@
       <li><b>No comment mining.</b> Comments are under 1% of viewers and a self-selecting group (superfans and haters) &mdash; noise, not demand. Engagement rate is an acceptable signal; comment content is not.</li>
       <li><b>Expertise-fit is a hard filter.</b> Demand only counts if the client can genuinely deliver on it. Chasing demand the client can't credibly serve produces faked videos that fail &mdash; validate against what they're truly expert in.</li>
       <li><b>Demand over supply.</b> Don't just clone viral videos. Use outliers to extrapolate the audience's pain points and aspirations, then ideate from those problems &mdash; including combining two demand signals into one original concept.</li>
+      <li><b>Validate the theme, not the video.</b> A single 40&times; upload is an anecdote; a vein &mdash; many videos with sustained views-per-video &mdash; is demand evidence. Boolean the theme before greenlighting anything.</li>
+      <li><b>Comparison-set hygiene.</b> Long-form only, Shorts and boosted excluded, before any multiple is computed. A baseline inflated by Shorts measures the wrong thing.</li>
+      <li><b>The transcript is the only source of words.</b> Scripts shape the client's interview words &mdash; never invent. Hook and close are the only exceptions.</li>
       <li><b>The recency rule.</b> A client's new topic suggestion (Slack or the living survey) must surface in the very next ideation round &mdash; or get an explicit CD response explaining why not. Silence reads as being ignored.</li>
     </ul>
   </div>
   </div>
 </div>
-
 
 </html>
