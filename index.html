@@ -18,6 +18,8 @@
     --green: #2E7D4F;         /* dragonfruit skin */
     --green-soft: #DFEFE5;
     --blue: #2456C9;          /* returns & chamber divider */
+    --purple: #6D3BC7;        /* brains */
+    --purple-soft: #EDE4FB;
     --flow: #4A414736;
     --flow-strong: #4A4147;
   }
@@ -26,6 +28,7 @@
       --paper: #1C1719; --panel: #251F22; --card: #2E272B; --ink: #F0E9ED;
       --muted: #A2969D; --line: #453C41; --accent: #F0578F; --accent-soft: #4A2334;
       --green: #62C08C; --green-soft: #1F3A2B; --blue: #7DA2F0;
+      --purple: #B79CF0; --purple-soft: #3A2A55;
       --flow: #B7ACB236; --flow-strong: #B7ACB2;
     }
   }
@@ -33,12 +36,14 @@
     --paper: #1C1719; --panel: #251F22; --card: #2E272B; --ink: #F0E9ED;
     --muted: #A2969D; --line: #453C41; --accent: #F0578F; --accent-soft: #4A2334;
     --green: #62C08C; --green-soft: #1F3A2B; --blue: #7DA2F0;
+    --purple: #B79CF0; --purple-soft: #3A2A55;
     --flow: #B7ACB236; --flow-strong: #B7ACB2;
   }
   :root[data-theme="light"] {
     --paper: #FBF9FA; --panel: #F3EEF1; --card: #FFFFFF; --ink: #241C21;
     --muted: #7A6E76; --line: #DCD3D8; --accent: #B01E5C; --accent-soft: #F7DFE9;
     --green: #2E7D4F; --green-soft: #DFEFE5; --blue: #2456C9;
+    --purple: #6D3BC7; --purple-soft: #EDE4FB;
     --flow: #4A414736; --flow-strong: #4A4147;
   }
 
@@ -70,7 +75,7 @@
   }
 
   .legend {
-    display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center;
+    display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
     font-size: 12.5px; color: var(--muted);
     padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px;
     background: var(--panel); margin-bottom: 26px;
@@ -87,6 +92,7 @@
   }
   .key-chip.agent { color: var(--accent); background: var(--accent-soft); }
   .key-chip.gate { color: var(--accent); background: none; border: 1.5px solid var(--accent); }
+  .key-chip.brain { color: var(--purple); background: var(--purple-soft); }
 
   .diagram { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 8px; }
   .diagram svg { display: block; min-width: 1200px; width: 100%; height: auto; }
@@ -104,6 +110,8 @@
   .chip-t  { font: 700 10px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.06em; fill: var(--green); }
   .a-chip  { fill: var(--accent-soft); }
   .a-t     { font: 700 10px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.06em; fill: var(--accent); }
+  .b-chip  { fill: var(--purple-soft); }
+  .b-t     { font: 700 10px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.06em; fill: var(--purple); }
   .gate-chip { fill: none; stroke: var(--accent); stroke-width: 1.5; }
   .g-head  { font: 700 13.5px "Avenir Next", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.09em; fill: var(--ink); }
   .g-sub   { font: 500 12px "Avenir Next", "Segoe UI", system-ui, sans-serif; fill: var(--muted); }
@@ -157,15 +165,15 @@
   <p class="eyebrow">Dragonfruit OS</p>
   <h1>Ideation Engine &mdash; Workflow</h1>
   <p class="sec-label">What</p>
-  <p class="intro">One portal where a Creative Director connects a client's YouTube channel and knowledge base. The engine pulls a wide but curated data set &mdash; from on and off of YouTube, but weighted to overindex on YouTube-native signals &mdash; refines it against the client's persona and DFM's standards, and presents topics the CD iterates on live: a gamified loop that only ends when every standard is hit. Each locked topic ships with sample packaging and a client-calibrated predictive view score, then returns after the client interview for angle-specific annotated research. The system self-scores against the YouTube Performance Standard's locked 7-day target. The goal isn't faster CDs &mdash; it's breaking the quality&harr;quantity tradeoff by 10&times;-ing research breadth and depth so synthesis happens naturally.</p>
+  <p class="intro">A Creative Director (CD) connects one client's YouTube channel and that client's knowledge base to a single portal. The engine gathers research from on and off YouTube (weighted to overindex on YouTube-native signals), filters it against who the client is and DFM's published standards, and presents candidate video topics. The CD works each topic until it passes every standard. Each topic that passes gets sample packaging (title + thumbnail) and <b>a client-calibrated predictive score of how many views the video is expected to get</b>. After the video is published, the system compares that prediction to the real view counts at 7 and 28 days and records whether the call was right. Those results feed the next cycle's scoring. That is the self-scoring feedback loop: every prediction is checked against reality, prediction accuracy is itself measured (target: correct 80% of the time), and both the topic selection and the scoring model improve with each cycle. The intended effect is a higher hit rate on what enters production, with research breadth per topic increasing rather than CD hours.</p>
   <p class="sec-label">How &mdash; the architecture, in three layers</p>
-  <p class="intro"><b>1 &middot; Data (the Dragonfruit Data Lake).</b> Raw records at rest: Turso performance snapshots, per-client benchmarks, A/B split-test results, and each client's knowledge base. On its own this is just data &mdash; it answers nothing.</p>
-  <p class="intro"><b>2 &middot; Processing (the agents).</b> This is where the intelligence lives. The research agent turns queries into compiled research; the scoring agent runs the prediction model against the lake; the tracking agent writes snapshots in. Agents turn stored data into answers &mdash; the lake without them is a filing cabinet.</p>
-  <p class="intro"><b>3 &middot; Craft (the phase brains).</b> A brain is a versioned spec in the repo; a skill loads it for one video, reads the standards and the client live, and writes the work back. Two phase brains power this map: the <b>Ideation Brain</b> behind the Ideation Engine (ideation craft &mdash; Adrian's Looms, Content Strategy Grains, outlier methodology, Topic Craft Standards guidance) and the <b>Scripting Brain</b> behind Pre-production (YouTube best practices from Adrian Lurie, Paddy Galloway, and Colin &amp; Samir). Neither is a box you open &mdash; skills reach into them behind the scenes.</p>
-  <p class="intro"><b>How the brains update.</b> Meetings, Slack, corrections, and the content strategists' monthly report are harvested into a <b>proposals queue</b>. A human approves every change: a PR updates the versioned repo (skills, brains, knowledge), or an in-app edit updates the living docs &mdash; the standards ("the bar"), the craft guides ("how to hit it"), and the client knowledge bases ("who the client is") &mdash; which the brains read live. Nothing updates itself.</p>
-  <p class="intro">When a CD connects a client, the session is scoped to that client's knowledge base and calibration. The data lake stays shared and read-only during ideation, and writes back are keyed by client, so ten CDs running ten clients simultaneously never collide. Human gates hold the pen everywhere it matters: the CD approves calibrated lessons and signs off the per-client benchmarks each cycle; only an ECD/CEO approves changes to the Ideation &amp; Craft Standards.</p>
+  <p class="intro"><b>1 &middot; Data layer &mdash; the Dragonfruit Data Lake.</b> Storage only; no logic lives here. Contents: the Turso performance database (immutable 7- and 28-day view snapshots, locked targets, and green/red status for every published video, all clients), the per-client benchmarks (derived tables the scoring model reads, signed off by the CD each cycle), the A/B testing database (packaging split-test outcomes), and one knowledge base per client.</p>
+  <p class="intro"><b>2 &middot; Processing layer &mdash; the agents.</b> Scheduled and on-demand jobs that read and write the data layer: the research agent compiles queries into research sets; the scoring agent computes predictive view scores against the benchmarks and locked targets; the tracking agent writes view snapshots on schedule; ingestion agents refresh the knowledge-base sources on their cadences. All writes are keyed by client, so concurrent sessions cannot conflict.</p>
+  <p class="intro"><b>3 &middot; Craft layer &mdash; the phase brains.</b> A brain is a versioned spec file in the repo. A skill loads its brain at invocation, reads the live standards and the client knowledge base, executes, and writes output back to the working tools. The <b>Ideation Brain</b> is loaded by ideation-phase skills (ideation craft: Adrian's Looms, Content Strategy Grains, outlier methodology, Topic Craft Standards guidance). The <b>Scripting Brain</b> is loaded by scripting-phase skills (YouTube best practices from Adrian Lurie, Paddy Galloway, and Colin &amp; Samir).</p>
+  <p class="intro"><b>Update path.</b> Meetings, Slack, corrections, and the content strategists' monthly report are harvested into a proposals queue. Every change requires human approval before landing: a repo PR for skills, brains, and knowledge; a live-doc edit for the standards ("the bar"), craft guides ("how to hit it"), and client knowledge bases ("who the client is"). Nothing updates itself.</p>
+  <p class="intro">Session scoping: connecting a client binds the session to that client's knowledge base and calibration. The data lake is read-only during ideation. Human gates: the CD approves calibrated lessons and signs off the per-client benchmarks each cycle; only an ECD/CEO approves changes to the Ideation &amp; Craft Standards.</p>
   <p class="sec-label">The two-layer principle</p>
-  <p class="intro">The process layer &mdash; engine, agents, skills, brains, standards &mdash; is the shared product: versioned in the repo, changed only by approved PR. The personal layer &mdash; each client's knowledge base, calibration, and lessons &mdash; is sealed per client and read live: never shared across sessions and never packaged into the product, enforced in tooling rather than policy. The engine never invents a client fact or the client's voice; client truth comes only from the knowledge base, so the CD's time goes only to taste and judgment.</p>
+  <p class="intro">The process layer &mdash; engine, agents, skills, brains, standards &mdash; is the shared product: versioned in the repo, changed only by approved PR. The personal layer &mdash; each client's knowledge base, calibration, and lessons &mdash; is sealed per client and read live: never shared across sessions and never packaged into the product, enforced in tooling rather than policy. The engine never invents a client fact or the client's voice; client truth comes only from the knowledge base.</p>
 
   <div class="legend">
     <span class="item"><span class="key-solid"></span> Inputs &amp; data</span>
@@ -175,6 +183,8 @@
     <span class="item"><span class="key-chip">WEEKLY</span> Cadence</span>
     <span class="item"><span class="key-chip agent">AGENT</span> Agent</span>
     <span class="item"><span class="key-chip gate">GATE</span> Human gate</span>
+    <span class="item"><span class="key-chip brain">BRAIN</span> Phase brain</span>
+    <span class="item">&#9312;&ndash;&#9314; Handoff order</span>
   </div>
 
   <div class="diagram">
@@ -196,41 +206,41 @@
 
     <!-- ============ INPUT FLOWS (gray) ============ -->
     <path class="flow" d="M440,440 H530 V570 H590" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,1010 H555 V774 H590" marker-end="url(#arr)"/>
-    <path class="flow" d="M440,1354 H500 V1052 H590" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,1010 H555 V746 H590" marker-end="url(#arr)"/>
+    <path class="flow" d="M440,1354 H500 V1080 H590" marker-end="url(#arr)"/>
     <path class="flow" d="M240,1448 V1454" marker-end="url(#arr)"/>
-    <path class="flow" d="M1200,1292 H1160 V1470 H540 V1425 H446" marker-end="url(#arr)"/>
-    <path class="flow" d="M540,1470 V1585 H446" marker-end="url(#arr)"/>
-    <text class="fl-t" x="850" y="1462" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
+    <path class="flow" d="M1200,1334 H1160 V1530 H540 V1425 H446" marker-end="url(#arr)"/>
+    <path class="flow" d="M540,1530 V1585 H446" marker-end="url(#arr)"/>
+    <text class="fl-t" x="850" y="1520" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
 
     <!-- ============ FORWARD FLOWS (green) ============ -->
-    <path class="flow-f" d="M1020,1052 H1110 V400 H1190" marker-end="url(#arrg)"/>
+    <path class="flow-f" d="M1020,1024 H1110 V400 H1190" marker-end="url(#arrg)"/>
     <path class="flow-f" d="M1400,532 V550" marker-end="url(#arrg)"/>
     <path class="flow-f" d="M1020,1160 H1175 V814 H1194" marker-end="url(#arrg)"/>
-    <path class="flow-f" d="M1400,1032 V1052" marker-end="url(#arrg)"/>
-    <path class="flow-f" d="M1400,1118 V1138" marker-end="url(#arrg)"/>
-    <path class="flow-f" d="M1400,1204 V1224" marker-end="url(#arrg)"/>
+    <path class="flow-f" d="M1400,1074 V1094" marker-end="url(#arrg)"/>
+    <path class="flow-f" d="M1400,1160 V1180" marker-end="url(#arrg)"/>
+    <path class="flow-f" d="M1400,1246 V1266" marker-end="url(#arrg)"/>
 
     <!-- ============ RETURN FLOW (blue) ============ -->
     <path class="flow-r" d="M1200,708 H1150 V1204 H1026" marker-end="url(#arrb)"/>
 
     <!-- ============ HANDOFF SEQUENCE DOTS ============ -->
-    <circle cx="1424" cy="541" r="10" fill="var(--card)" stroke="var(--green)" stroke-width="1.5"/>
-    <text class="seq-t" x="1424" y="545" text-anchor="middle" fill="var(--green)">1</text>
-    <circle cx="1150" cy="960" r="10" fill="var(--card)" stroke="var(--blue)" stroke-width="1.5"/>
+    <circle cx="1400" cy="541" r="11" fill="var(--card)" stroke="var(--green)" stroke-width="1.75"/>
+    <text class="seq-t" x="1400" y="545" text-anchor="middle" fill="var(--green)">1</text>
+    <circle cx="1150" cy="960" r="11" fill="var(--card)" stroke="var(--blue)" stroke-width="1.75"/>
     <text class="seq-t" x="1150" y="964" text-anchor="middle" fill="var(--blue)">2</text>
-    <circle cx="1175" cy="1000" r="10" fill="var(--card)" stroke="var(--green)" stroke-width="1.5"/>
+    <circle cx="1175" cy="1000" r="11" fill="var(--card)" stroke="var(--green)" stroke-width="1.75"/>
     <text class="seq-t" x="1175" y="1004" text-anchor="middle" fill="var(--green)">3</text>
 
     <!-- ============ FEEDBACK LOOPS (dashed) ============ -->
-    <path class="fb" d="M1400,300 V264 H30 V728 H36" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1400,300 V264 H28 V728 H36" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="760" y="256" text-anchor="middle">Unpicked standard-qualifying topics persist as Validated topics in the knowledge base</text>
 
-    <path class="fb" d="M1400,1350 V1724 H240 V1704" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1400,1392 V1724 H240 V1704" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="820" y="1716" text-anchor="middle">7-day self-scores land in the Per-client benchmarks &middot; Standards updates pass the ECD/CEO gate</text>
 
-    <path class="fb" d="M1480,1350 V1760 H1024"/>
-    <path class="fb" d="M700,1760 H12 V646 H36" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M1480,1392 V1760 H1024"/>
+    <path class="fb" d="M700,1760 H8 V646 H36" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="760" y="1805" text-anchor="middle">Qualitative lessons: monthly report &rarr; CD gate &rarr; Calibrated lessons</text>
 
     <rect class="node" x="700" y="1735" width="324" height="50" rx="8"/>
@@ -254,7 +264,7 @@
     <text class="n-sub" x="76" y="158">What ideation calls first &middot; raw sources stay queryable</text>
 
     <text class="g-sub" x="76" y="192">Sources &mdash; distill into the Voice guide</text>
-    <path class="fb" d="M60,646 H50 V136 H56" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M420,646 H430 V136 H426" marker-end="url(#arrfb)"/>
 
     <rect class="node" x="60" y="202" width="360" height="58" rx="8"/>
     <text class="n-title" x="76" y="226">Voice Looms</text>
@@ -340,7 +350,7 @@
     <rect class="g-box" x="40" y="1322" width="400" height="376" rx="12"/>
     <rect class="tick" x="40" y="1338" width="4" height="26" rx="2"/>
     <text class="g-head" x="62" y="1352">DRAGONFRUIT PROPRIETARY DATA LAKE</text>
-    <text class="g-sub" x="62" y="1372">Cross-client records &mdash; raw data the agents process</text>
+    <text class="g-sub" x="62" y="1372">Cross-client storage layer &mdash; processed by the agents</text>
 
     <rect class="node" x="60" y="1390" width="360" height="58" rx="8"/>
     <text class="n-title" x="76" y="1414">Turso Performance Database</text>
@@ -370,8 +380,8 @@
     <rect class="e-box" x="600" y="410" width="420" height="1038" rx="14"/>
     <text class="e-head" x="810" y="448" text-anchor="middle">IDEATION ENGINE</text>
     <text class="g-sub" x="810" y="468" text-anchor="middle">CD portal &mdash; one client connected at a time</text>
-    <rect class="a-chip" x="705" y="478" width="210" height="20" rx="10"/>
-    <text class="a-t" x="810" y="492" text-anchor="middle">POWERED BY THE IDEATION BRAIN</text>
+    <rect class="b-chip" x="705" y="478" width="210" height="20" rx="10"/>
+    <text class="b-t" x="810" y="492" text-anchor="middle">POWERED BY THE IDEATION BRAIN</text>
 
     <rect class="ch-box" x="614" y="510" width="392" height="606" rx="10"/>
     <text class="ch-cap" x="640" y="530">A &middot; TOPIC GENERATION</text>
@@ -407,7 +417,7 @@
     <text class="n-sub" x="676" y="909">CD picks the ones worth working on, adjusts angle,</text>
     <text class="n-sub" x="676" y="924">title &amp; thumbnail concept in a gamified loop until</text>
     <text class="n-sub" x="676" y="939">the topic meets 100% of the DFM standards</text>
-    <text class="n-sub" x="676" y="954">Cards show the creative + predictive view score</text>
+    <text class="n-sub" x="676" y="954">CD makes final topic selection</text>
 
     <rect class="e-row" x="640" y="1000" width="360" height="104" rx="8"/>
     <text class="step-n" x="656" y="1024">5</text>
@@ -419,7 +429,7 @@
     <rect class="a-chip" x="886" y="1007" width="104" height="20" rx="10"/>
     <text class="a-t" x="938" y="1021" text-anchor="middle">SCORING AGENT</text>
 
-    <path class="fb" d="M640,1052 H618 V774 H630" marker-end="url(#arrfb)"/>
+    <path class="fb" d="M640,1030 H618 V795 H630" marker-end="url(#arrfb)"/>
 
     <rect class="ch-box" x="614" y="1136" width="392" height="296" rx="10"/>
     <text class="ch-cap" x="640" y="1156">B &middot; CONCEPT GENERATION</text>
@@ -456,18 +466,18 @@
     <text class="n-title" x="1222" y="414">Sample packaging &mdash; title + thumbnail variants</text>
     <text class="n-sub" x="1222" y="432">The ~5&ndash;6 selected topics with their angles</text>
     <text class="n-title" x="1222" y="460">Predictive view score</text>
-    <text class="n-sub" x="1222" y="478">Calibrated to specific hooked up client</text>
+    <text class="n-sub" x="1222" y="478">Expected views &mdash; calibrated to the connected client</text>
     <text class="n-sub" x="1222" y="493">Informed by the YouTube Performance Standard's locked target</text>
     <text class="n-sub" x="1222" y="516">Annotated research arrives later, per angle, from Chamber B</text>
     </g>
 
     <!-- ============ PRE-PRODUCTION ============ -->
     <g>
-    <rect class="e-box" x="1200" y="560" width="400" height="472" rx="14"/>
+    <rect class="e-box" x="1200" y="560" width="400" height="514" rx="14"/>
     <text class="e-head" x="1400" y="596" text-anchor="middle">PRE-PRODUCTION</text>
     <text class="g-sub" x="1400" y="616" text-anchor="middle">Claude skills with human gate</text>
-    <rect class="a-chip" x="1285" y="626" width="230" height="20" rx="10"/>
-    <text class="a-t" x="1400" y="640" text-anchor="middle">POWERED BY THE SCRIPTING BRAIN</text>
+    <rect class="b-chip" x="1285" y="626" width="230" height="20" rx="10"/>
+    <text class="b-t" x="1400" y="640" text-anchor="middle">POWERED BY THE SCRIPTING BRAIN</text>
 
     <rect class="e-row" x="1220" y="656" width="360" height="104" rx="8"/>
     <text class="step-n" x="1236" y="680">1</text>
@@ -484,11 +494,9 @@
     <text class="n-sub" x="1256" y="828">CD finalizes with the concept skill</text>
     <text class="n-sub" x="1256" y="843">Ships to the client for approval</text>
 
-    <rect class="e-row" x="1220" y="868" width="360" height="148" rx="8"/>
+    <rect class="e-row" x="1220" y="868" width="360" height="190" rx="8"/>
     <text class="step-n" x="1236" y="892">3</text>
     <text class="n-title" x="1256" y="892">Script &mdash; the CD writes it</text>
-    <rect class="a-chip" x="1502" y="875" width="68" height="20" rx="10"/>
-    <text class="a-t" x="1536" y="889" text-anchor="middle">3 AGENTS</text>
     <text class="n-sub" x="1256" y="911">CD writes the script with the scripting skill, then:</text>
     <text class="n-sub" x="1256" y="926">1 &middot; YouTube Fluency Grading Agent &mdash; panel powered by</text>
     <text class="n-sub" x="1256" y="941">the Scripting Brain: Lurie &middot; Galloway &middot; Colin &amp; Samir</text>
@@ -496,30 +504,37 @@
     <text class="n-sub" x="1256" y="971">guide &amp; flags AI slop</text>
     <text class="n-sub" x="1256" y="986">3 &middot; Scoring Agent &mdash; grades the hook against the 6&ndash;10</text>
     <text class="n-sub" x="1256" y="1001">outlier transcripts + triangulates client benchmarks</text>
+    <text class="n-sub" x="1256" y="1016">4 &middot; Approved by client</text>
+    <rect class="a-chip" x="1256" y="1028" width="108" height="20" rx="10"/>
+    <text class="a-t" x="1310" y="1042" text-anchor="middle">FLUENCY AGENT</text>
+    <rect class="a-chip" x="1372" y="1028" width="92" height="20" rx="10"/>
+    <text class="a-t" x="1418" y="1042" text-anchor="middle">VOICE AGENT</text>
+    <rect class="a-chip" x="1472" y="1028" width="104" height="20" rx="10"/>
+    <text class="a-t" x="1524" y="1042" text-anchor="middle">SCORING AGENT</text>
     </g>
 
     <!-- ============ DOWNSTREAM CHAIN ============ -->
     <g>
-    <rect class="p-node" x="1200" y="1062" width="400" height="56" rx="8"/>
-    <text class="n-title" x="1220" y="1086">Production</text>
-    <text class="n-sub" x="1220" y="1105">Shoot, edit, package (videos go through their own standards)</text>
+    <rect class="p-node" x="1200" y="1104" width="400" height="56" rx="8"/>
+    <text class="n-title" x="1220" y="1128">Production</text>
+    <text class="n-sub" x="1220" y="1147">Shoot, edit, package (videos go through their own standards)</text>
     </g>
 
     <g>
-    <rect class="p-node" x="1200" y="1148" width="400" height="56" rx="8"/>
-    <text class="n-title" x="1220" y="1172">Publish to YouTube</text>
-    <text class="n-sub" x="1220" y="1191">Every asset catalogued &amp; tracked</text>
+    <rect class="p-node" x="1200" y="1190" width="400" height="56" rx="8"/>
+    <text class="n-title" x="1220" y="1214">Publish to YouTube</text>
+    <text class="n-sub" x="1220" y="1233">Every asset catalogued &amp; tracked</text>
     </g>
 
     <g>
-    <rect class="p-node" x="1200" y="1234" width="400" height="116" rx="8"/>
-    <text class="n-title" x="1220" y="1260">Track &amp; self-score</text>
-    <text class="n-sub" x="1220" y="1279">7 &amp; 28-day view snapshots &middot; A/B results</text>
-    <text class="n-sub" x="1220" y="1294">Called green/red vs the locked 7-day target?</text>
-    <text class="n-sub" x="1220" y="1309">28-day check upgrades slow burners</text>
-    <text class="n-sub" x="1220" y="1324">Accuracy target: 80% &middot; results feed the benchmarks</text>
-    <rect class="a-chip" x="1462" y="1241" width="114" height="20" rx="10"/>
-    <text class="a-t" x="1519" y="1255" text-anchor="middle">TRACKING AGENT</text>
+    <rect class="p-node" x="1200" y="1276" width="400" height="116" rx="8"/>
+    <text class="n-title" x="1220" y="1302">Track &amp; self-score</text>
+    <text class="n-sub" x="1220" y="1321">7 &amp; 28-day view snapshots &middot; A/B results</text>
+    <text class="n-sub" x="1220" y="1336">Called green/red vs the locked 7-day target?</text>
+    <text class="n-sub" x="1220" y="1351">28-day check upgrades slow burners</text>
+    <text class="n-sub" x="1220" y="1366">Accuracy target: 80% &middot; results feed the benchmarks</text>
+    <rect class="a-chip" x="1462" y="1283" width="114" height="20" rx="10"/>
+    <text class="a-t" x="1519" y="1297" text-anchor="middle">TRACKING AGENT</text>
     </g>
   </svg>
   </div>
@@ -539,7 +554,7 @@
     <h2>Gamified CD portal &mdash; design notes</h2>
     <ul>
       <li><b>Deal (Pull).</b> Each pull deals the CD five primary topic cards, each fanning out into 1&ndash;3 angle offshoots with title + thumbnail variants. Weak cards are discarded; standard-qualifying ones that aren't picked persist as Validated topics in the knowledge base.</li>
-      <li><b>Shape (Present &amp; shape).</b> The CD picks the cards worth working on and adjusts angle, title, and thumbnail concept in a live loop &mdash; every DFM standard is a meter that re-scores on each edit, and no topic locks until it meets 100%. Cards show just the creative and the predictive view score.</li>
+      <li><b>Shape (Present &amp; shape).</b> The CD picks the cards worth working on and adjusts angle, title, and thumbnail concept in a live loop &mdash; every DFM standard is a meter that re-scores on each edit, and no topic locks until it meets 100%. The CD makes the final topic selection.</li>
       <li><b>Lock (Benchmark &amp; greenlight).</b> The scoring agent delivers the predictive view score from the Per-client benchmarks and the locked target. Clears the bar &rarr; the topic locks to the slate, ready to share with the client. Misses &rarr; back to Pull with the learnings.</li>
       <li><b>The meta-game.</b> Track each CD's calling average &mdash; how often their locked topics actually went green at 7 days. Prediction accuracy becomes the CD's score too, not just the model's.</li>
       <li><b>Deliberately excluded:</b> leaderboards ranking CDs against each other. Channels differ wildly in difficulty and the multiple absorbs that difference, so the game is always CD-vs-the-bar, never CD-vs-CD.</li>
