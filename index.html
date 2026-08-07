@@ -165,7 +165,7 @@
   <p class="eyebrow">Dragonfruit OS</p>
   <h1>Ideation Engine &mdash; Workflow</h1>
   <p class="sec-label">What</p>
-  <p class="intro">A Creative Director (CD) connects one client's YouTube channel and that client's knowledge base to a single portal. The engine gathers research from on and off YouTube (weighted to overindex on YouTube-native signals), filters it against who the client is and DFM's published standards, and presents candidate video topics. The CD works each topic until it passes every standard. Each topic that passes gets sample packaging (title + thumbnail) and <b>a client-calibrated predictive score of how many views the video is expected to get</b>. After the video is published, the system compares that prediction to the real view counts at 7 and 28 days and records whether the call was right. Those results feed the next cycle's scoring. That is the self-scoring feedback loop: every prediction is checked against reality, prediction accuracy is itself measured (target: correct 80% of the time), and both the topic selection and the scoring model improve with each cycle. The intended effect is a higher hit rate on what enters production, with research breadth per topic increasing rather than CD hours.</p>
+  <p class="intro">A Creative Director (CD) connects one client's YouTube channel and that client's knowledge base to a single portal. The engine gathers research from on and off YouTube (weighted to overindex on YouTube-native signals), filters it against who the client is and DFM's published standards, and presents candidate video topics. The CD works each topic until it passes every standard. Each topic that passes gets sample packaging (title + thumbnail) and <b>a client-calibrated predictive score of how many views the video is expected to get</b>. After the video is published, the system compares that prediction to the real view counts at 7 and 28 days and records whether the call was right. Those results feed the next cycle's scoring. That is the self-scoring feedback loop: every prediction is checked against reality; prediction accuracy is itself measured (target: correct 80% of the time); topic selection sharpens each cycle through confirmed lessons; and the scoring model recalibrates through agent-drafted, backtested update proposals that a human approves before they ship. The intended effect is a higher hit rate on what enters production, with research breadth per topic increasing rather than CD hours.</p>
   <p class="sec-label">How &mdash; the architecture, in three layers</p>
   <p class="intro"><b>1 &middot; Data layer &mdash; the Dragonfruit Data Lake.</b> Storage only; no logic lives here. Contents: the Turso performance database (immutable 7- and 28-day view snapshots, locked targets, and green/red status for every published video, all clients), the per-client benchmarks (derived tables the scoring model reads, signed off by the CD each cycle), and the A/B testing database (packaging split-test outcomes). Client knowledge bases live in the personal layer, not the lake.</p>
   <p class="intro"><b>2 &middot; Processing layer &mdash; the agents.</b> Scheduled and on-demand jobs that read and write the data layer: the research agent compiles queries into research sets; the scoring agent computes predictive view scores against the benchmarks and locked targets; the tracking agent writes view snapshots on schedule; ingestion agents refresh the knowledge-base sources on their cadences. All writes are keyed by client, so concurrent sessions cannot conflict.</p>
@@ -211,7 +211,7 @@
     <path class="flow" d="M240,1448 V1454" marker-end="url(#arr)"/>
     <path class="flow" d="M1200,1424 H1160 V1530 H540 V1425 H446" marker-end="url(#arr)"/>
     <path class="flow" d="M540,1530 V1585 H446" marker-end="url(#arr)"/>
-    <text class="fl-t" x="850" y="1520" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
+    <text class="fl-t" x="770" y="1520" text-anchor="middle">View snapshots &rarr; Turso &middot; split-test results &rarr; A/B database</text>
 
     <!-- ============ FORWARD FLOWS (green) ============ -->
     <path class="flow-f" d="M1020,1024 H1110 V400 H1190" marker-end="url(#arrg)"/>
@@ -236,18 +236,28 @@
     <path class="fb" d="M1400,300 V264 H28 V728 H36" marker-end="url(#arrfb)"/>
     <text class="fb-t" x="760" y="256" text-anchor="middle">Unpicked standard-qualifying topics persist as Validated topics in the knowledge base</text>
 
-    <path class="fb" d="M1400,1482 V1724 H240 V1704" marker-end="url(#arrfb)"/>
-    <text class="fb-t" x="820" y="1716" text-anchor="middle">7-day self-scores land in the Per-client benchmarks &middot; Standards updates pass the ECD/CEO gate</text>
+    <path class="fb" d="M1400,1482 V1724 H1064"/>
+    <text class="fb-t" x="1240" y="1716" text-anchor="middle">Self-scores feed the benchmarks</text>
+    <path class="fb" d="M700,1724 H240 V1704" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="470" y="1716" text-anchor="middle">Standards updates pass the ECD/CEO gate</text>
 
-    <path class="fb" d="M1480,1482 V1760 H1064"/>
-    <path class="fb" d="M700,1760 H8 V646 H36" marker-end="url(#arrfb)"/>
-    <text class="fb-t" x="760" y="1805" text-anchor="middle">Qualitative lessons: monthly report &rarr; CD gate &rarr; Calibrated lessons</text>
+    <rect class="node" x="700" y="1688" width="360" height="72" rx="8"/>
+    <text class="n-title" x="716" y="1708">Recalibration proposal</text>
+    <text class="n-sub" x="716" y="1727">Agent drafts backtested model updates &rarr; queue</text>
+    <text class="n-sub" x="716" y="1742">Global: ECD/CEO gate &middot; per-client: CD sign-off</text>
+    <rect class="a-chip" x="908" y="1695" width="140" height="20" rx="10"/>
+    <text class="a-t" x="978" y="1709" text-anchor="middle">RECALIBRATION AGENT</text>
+    <path class="fb" d="M1000,1688 V1460" marker-end="url(#arrfb)"/>
 
-    <rect class="node" x="700" y="1735" width="360" height="50" rx="8"/>
-    <text class="n-title" x="716" y="1755">Monthly report &mdash; content strategists</text>
-    <text class="n-sub" x="716" y="1772">Compiles qualitative lessons &rarr; proposals queue</text>
-    <rect class="gate-chip" x="988" y="1742" width="64" height="20" rx="10"/>
-    <text class="a-t" x="1020" y="1756" text-anchor="middle">CD GATE</text>
+    <path class="fb" d="M1480,1482 V1800 H1064"/>
+    <path class="fb" d="M700,1800 H8 V646 H36" marker-end="url(#arrfb)"/>
+    <text class="fb-t" x="760" y="1845" text-anchor="middle">Qualitative lessons: monthly report &rarr; CD gate &rarr; Calibrated lessons</text>
+
+    <rect class="node" x="700" y="1775" width="360" height="50" rx="8"/>
+    <text class="n-title" x="716" y="1795">Monthly report &mdash; content strategists</text>
+    <text class="n-sub" x="716" y="1812">Compiles qualitative lessons &rarr; proposals queue</text>
+    <rect class="gate-chip" x="988" y="1782" width="64" height="20" rx="10"/>
+    <text class="a-t" x="1020" y="1796" text-anchor="middle">CD GATE</text>
 
     <!-- ============ GROUP A: CLIENT KNOWLEDGE BASE ============ -->
     <g>
@@ -551,6 +561,7 @@
     <div class="loop"><b>Standards loop</b><span>Monthly update proposals drawn from agency-wide performance pass an ECD/CEO approval gate before the Ideation &amp; Craft Standards change. No automated rewrites.</span></div>
     <div class="loop"><b>Lessons loop</b><span>Content strategists compile qualitative lessons into the monthly report; the CD approves at the gate; confirmed lessons write into Calibrated lessons &mdash; which feed the Voice guide.</span></div>
     <div class="loop"><b>Brain update loop</b><span>Meetings, Slack, corrections &amp; the monthly report are harvested into a proposals queue; a human approves; a PR updates the versioned repo (skills, brains, knowledge) or an in-app edit updates the living docs. Nothing updates itself.</span></div>
+    <div class="loop"><b>Model loop</b><span>The recalibration agent studies every prediction vs reality and drafts backtested model updates into the proposals queue. Per-client calibration passes the CD's cycle sign-off; global model versions pass the ECD/CEO gate. Approved updates ship as a versioned PR, and every prediction logs its model version.</span></div>
   </div>
 
   <div class="bubbles">
@@ -575,7 +586,7 @@
       <li><b>Comparison-set hygiene.</b> Long-form only, Shorts and boosted excluded, before any multiple is computed. A baseline inflated by Shorts measures the wrong thing.</li>
       <li><b>The transcript is the only source of words.</b> Scripts shape the client's interview words &mdash; never invent. Hook and close are the only exceptions.</li>
       <li><b>The recency rule.</b> A client's new topic suggestion (Slack or the living survey) must surface in the very next ideation round &mdash; or get an explicit CD response explaining why not. Silence reads as being ignored.</li>
-      <li><b>Humans hold the pen.</b> Lessons enter through the CD gate; the CD signs off the Per-client benchmarks each cycle; standards change only through the ECD/CEO gate; brains and skills change only by approved PR.</li>
+      <li><b>Humans hold the pen.</b> Lessons enter through the CD gate; the CD signs off the Per-client benchmarks each cycle; standards change only through the ECD/CEO gate; brains, skills, and the scoring model change only by approved PR &mdash; and every prediction logs its model version.</li>
     </ul>
   </div>
   </div>
